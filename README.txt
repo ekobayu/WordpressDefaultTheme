@@ -1,4 +1,4 @@
-image:https://img.shields.io/coverity/ondemand/streams/STREAM.svg[Coverity Code Advisor On Demand Stream Badge]
+<img src="https://img.shields.io/coverity/ondemand/streams/STREAM.svgf" alt="Coverity">
 
 === Wordpress Default ===
 Contributors: Eko Bayu
