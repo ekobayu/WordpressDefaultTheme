@@ -487,9 +487,6 @@ get_header(); ?>
                             </div>
                             <!-- Content -->
 
-
-
-
                             <!-- Sidebar -->
                             <div class="col-lg-3 col-md-5 col-xs-12 custom-re">
                                 <div class="row">

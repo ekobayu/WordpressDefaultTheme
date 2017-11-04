@@ -13,7 +13,6 @@
  */
 
 ?>
-
 		<!-- Footer Starts -->
         <footer class="footer">
 

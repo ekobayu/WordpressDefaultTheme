@@ -1,6 +1,5 @@
 === Wordpress Default ===
 Contributors: Eko Bayu
-Requires at least: WordPress 4.8
 Tested up to: WordPress 4.8
 Version: 1.1
 License: GPLv2 or later
