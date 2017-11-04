@@ -65,22 +65,6 @@
 	</div>
 	<!-- Slide Menu -->
 
-    <!-- search modal -->
-    <div class="md-modal md-effect-7 search-modal font-oswald" id="search-popup">
-        <div class="md-content">
-            <!-- serach form -->
-            <form class="search-form">
-                <input class="form-control" placeholder="Type &amp; hit enter" type="text">
-            </form>
-            <a class="md-close pull-right fa fa-times" href="#"></a>
-            <!-- serach form -->
-        </div>
-    </div>
-    <!-- search modal -->
-
-    <!-- overlay -->
-    <div class="md-overlay"></div>
-    <!-- overlay -->
 	<?php wp_footer()?>
 </body>
 

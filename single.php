@@ -74,28 +74,6 @@ get_header(); ?>
                                             </div>
                                             <!-- populer tags --> 
 
-                                            <!-- social icons --> 
-                                            <!-- <div class="col-md-6">
-                                                <div class="blog-social">
-                                                     <span class="share-icon btn-social-icon btn-adn"  data-toggle="tooltip" data-placement="top" title="Sharing is Caring">
-                                                            <span class="fa fa-share-alt"></span>
-                                                        </span>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="btn-social-icon btn-facebook" href="#"  data-toggle="tooltip" data-placement="top" title="Share of Facebook">
-                                                                <span class="fa fa-facebook"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="btn-social-icon btn-twitter" href="#"  data-toggle="tooltip" data-placement="top" title="Post on Twitter">
-                                                                <span class="fa fa-twitter"></span>
-                                                            </a>
-                                                        </li>
-                                                     </ul>                                                   
-                                                </div>
-                                            </div> -->
-                                            <!-- social icons --> 
-
                                         </div>
                                         <!-- tags and social icons -->
 

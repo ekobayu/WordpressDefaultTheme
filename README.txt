@@ -1,4 +1,6 @@
-=== Default ===
+.. image:: https://img.shields.io/coverity/ondemand/streams/STREAM.svg   :target: 
+
+=== Wordpress Default ===
 Contributors: Eko Bayu
 Requires at least: WordPress 4.8
 Tested up to: WordPress 4.8
