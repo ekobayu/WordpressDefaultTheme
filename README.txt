@@ -1,5 +1,3 @@
-<img src="https://img.shields.io/coverity/ondemand/streams/STREAM.svgf" alt="Coverity">
-
 === Wordpress Default ===
 Contributors: Eko Bayu
 Requires at least: WordPress 4.8
