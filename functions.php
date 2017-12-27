@@ -31,6 +31,8 @@ function default_scripts()
     wp_enqueue_style('default-screen2', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Vollkorn:400,700', array());
     wp_enqueue_style('default-screen3', THEME_URI . '/assets/css/style.css', array());
     wp_enqueue_style('default-screen4', THEME_URI . '/style.css', array());
+    wp_enqueue_style('default-screen5', THEME_URI . '/assets/css/theme-768.css', array() , false , '(min-width: 767px)');
+    wp_enqueue_style('default-screen6', THEME_URI . '/assets/css/theme-1024.css', array() , false , '(min-width: 1023px)');
 
     wp_enqueue_script('default-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js', array('jquery'), false, true); 
     wp_enqueue_script('default-script1', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), false, true);
@@ -81,6 +83,47 @@ function setup_menu() {
 }
 setup_menu();
 // Menu Setup
+
+//add class on li menu
+function add_classes_on_li($classes, $item, $args) {
+  $classes[] = 'nav-item';
+  return $classes;
+}
+add_filter('nav_menu_css_class','add_classes_on_li',1,3);
+
+//add class on a menu
+function add_classes_on_a($ulclass) {
+  return preg_replace('/<a/', '<a class="nav-link pr-3 pl-3"', $ulclass, -1);
+}
+add_filter('wp_nav_menu','add_classes_on_a');
+
+//add class active menu
+function special_nav_class ($classes, $item) {
+  if (in_array('current-menu-item', $classes) ){
+      $classes[] = 'active ';
+  }
+  return $classes;
+}
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+// Hide content editor
+add_action( 'admin_init', 'hide_editor' );
+function hide_editor() {
+  // Get the Post ID.
+  $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+  if( !isset( $post_id ) ) return;
+  // Hide the editor on the page titled 'Homepage'
+  $homepgname = get_the_title($post_id);
+  if($homepgname == 'Home'){ 
+    remove_post_type_support('page', 'editor');
+  }
+  // Hide the editor on a page with a specific page template
+  // Get the name of the Page Template file.
+  $template_file = get_post_meta($post_id, '_wp_page_template', true);
+  if($template_file == 'my-page-template.php'){ // the filename of the page template
+    remove_post_type_support('page', 'editor');
+  }
+}
 
 // remove wp version in css and js
 add_filter( 'style_loader_src', 'sdt_remove_ver_css_js', 9999 );

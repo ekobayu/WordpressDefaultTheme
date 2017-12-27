@@ -1,0 +1,30 @@
+
+//repeater acf
+<?php
+
+// check if the repeater field has rows of data
+if( have_rows('repeater_field_name') ):
+
+ 	// loop through the rows of data
+    while ( have_rows('repeater_field_name') ) : the_row();
+
+        // display a sub field value
+        the_sub_field('sub_field_name');
+
+    endwhile;
+
+endif;
+
+?>
+
+// nampilin post
+<?php while (have_posts()) : the_post(); ?>
+      <div class="wrap-about-project">
+           <?php the_content(); ?>
+       </div>
+<?php endwhile; ?>
+
+// acf shortcode
+<?php the_field('top_header_instagram', 'options'); ?>
+
+<?php the_field('email_address'); ?>
