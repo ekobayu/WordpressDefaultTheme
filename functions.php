@@ -102,6 +102,9 @@ function special_nav_class ($classes, $item) {
   if (in_array('current-menu-item', $classes) ){
       $classes[] = 'active ';
   }
+  else if (in_array('current-page-ancestor', $classes) ){
+      $classes[] = 'active ';
+  }
   else if(is_single() && $item->title == 'News'){
       $classes[] = 'current-menu-item active';
   }
