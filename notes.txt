@@ -1,20 +1,15 @@
 
 //repeater acf
 <?php
-
-// check if the repeater field has rows of data
 if( have_rows('repeater_field_name') ):
 
- 	// loop through the rows of data
     while ( have_rows('repeater_field_name') ) : the_row();
 
-        // display a sub field value
         the_sub_field('sub_field_name');
 
     endwhile;
 
 endif;
-
 ?>
 
 // nampilin post
@@ -31,3 +26,8 @@ endif;
 
 //wpml code string
 <?php _e('CONTACT US','label') ?>
+
+if(ICL_LANGUAGE_CODE=='en') { 
+   echo '<li class="breadcrumb-item">News</li>';
+ } else { if(ICL_LANGUAGE_CODE=='id') { 
+    echo '<li class="breadcrumb-item">Berita</li>'; } }
