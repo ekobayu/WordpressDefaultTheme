@@ -186,3 +186,44 @@ function custom_menu_page_removing() {
   // remove_menu_page( 'options-general.php' );        //Settings
 }
 add_action( 'admin_menu', 'custom_menu_page_removing' );
+
+function get_breadcrumb() {
+    echo '<li class="breadcrumb-item"><a href="'.home_url().'" rel="nofollow">Home</a></li>';
+    if (is_category() || is_single()) {
+        $category_detail=get_the_category($post->ID);
+        echo '<li class="breadcrumb-item">';
+        foreach($category_detail as $cd){
+          echo ' ';
+          echo $cd->cat_name; }
+        echo '</li>';
+      if (is_single()) {
+          echo '<li class="breadcrumb-item">';
+          the_title();
+          echo '</li>';
+      }
+    } elseif (is_page()) {
+        echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;";
+        echo the_title();
+    } elseif (is_search()) {
+        echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;Search Results for... ";
+        echo '"<em>';
+        echo the_search_query();
+        echo '</em>"';
+    }
+}
+
+function language_selector_flags(){
+        $languages = icl_get_languages('skip_missing=0&orderby=code');
+            if(!empty($languages)){
+                foreach($languages as $l){
+                if($l['active']) {
+                echo '<a class="active" href="'.$l['url'].'">';
+                }
+                else{
+                echo '<a class="nav-link" href="'.$l['url'].'">';
+                }
+                echo $l['language_code'];
+                echo '</a>';
+        }
+    }
+}

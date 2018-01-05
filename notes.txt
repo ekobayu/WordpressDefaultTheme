@@ -28,3 +28,6 @@ endif;
 <?php the_field('top_header_instagram', 'options'); ?>
 
 <?php the_field('email_address'); ?>
+
+//wpml code string
+<?php _e('CONTACT US','label') ?>
