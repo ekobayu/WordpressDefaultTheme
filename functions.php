@@ -58,18 +58,52 @@ function custom_pagination() {
             'prev_text'    => __('<span aria-hidden="true">prev</span>'),
             'next_text'    => __('<span aria-hidden="true">next</span>'),
         ) );
-        if( is_array( $pages ) ) {
-            $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
-            echo '<ul class="pagination mb-30">';
-            foreach ( $pages as $page ) {
-                if (strpos($page, 'current') !== false) {
-                    echo "<li class='active'>$page</li>"; }
-                 else {
-                    echo "<li>$page</li>"; 
-                 }
-            }
-           echo '</ul>';
+    $output = '';
+
+    if( is_array( $pages ) ) {
+        $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var( 'paged' );
+
+        $output .=  '<ul class="pagination">';
+        foreach ( $pages as $page ) {
+            $output .= "<li class='page-item'>$page</li>";
         }
+        $output .= '</ul>';
+        $dom = new \DOMDocument();
+        $dom->loadHTML( mb_convert_encoding( $output, 'HTML-ENTITIES', 'UTF-8' ) );
+        // Create an instance of DOMXpath and all elements with the class 'page-numbers' 
+        $xpath = new \DOMXpath( $dom );
+        $page_numbers = $xpath->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' page-numbers ')]" );
+
+        foreach ( $page_numbers as $page_numbers_item ) {
+
+            // Replace the class 'current' with 'active'
+            $page_numbers_item->attributes->item(0)->value = str_replace( 
+                            'current',
+                            'active',
+                            $page_numbers_item->attributes->item(0)->value );
+
+            // Replace the class 'page-numbers' with 'page-link'
+            $page_numbers_item->attributes->item(0)->value = str_replace( 
+                            'page-numbers',
+                            'page-link',
+                            $page_numbers_item->attributes->item(0)->value );
+        }
+        $output = $dom->saveHTML();
+
+    }
+    return $output;
+    // if( is_array( $pages ) ) {
+    //     $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
+    //     echo '<ul class="pagination mb-30">';
+    //     foreach ( $pages as $page ) {
+    //         if (strpos($page, 'current') !== false) {
+    //             echo "<li class='active'>$page</li>"; }
+    //             else {
+    //             echo "<li>$page</li>"; 
+    //             }
+    //     }
+    //     echo '</ul>';
+    // }
 }
 // Pagination Setup
 

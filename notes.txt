@@ -2,13 +2,9 @@
 //repeater acf
 <?php
 if( have_rows('repeater_field_name') ):
-
     while ( have_rows('repeater_field_name') ) : the_row();
-
         the_sub_field('sub_field_name');
-
     endwhile;
-
 endif;
 ?>
 
@@ -21,7 +17,7 @@ endif;
 
 // acf shortcode
 <?php the_field('top_header_instagram', 'options'); ?>
-
+<?php the_sub_field('sub_field_name'); ?>
 <?php the_field('email_address'); ?>
 
 //wpml code string
@@ -31,3 +27,17 @@ if(ICL_LANGUAGE_CODE=='en') {
    echo '<li class="breadcrumb-item">News</li>';
  } else { if(ICL_LANGUAGE_CODE=='id') { 
     echo '<li class="breadcrumb-item">Berita</li>'; } }
+
+//image link
+<?php echo THEME_URI; ?>
+
+//check if field empty
+<?php if(! empty(get_sub_field('timeline_image') )) { ?>
+<?php if(! empty(get_field('timeline_image') )) { ?>
+
+//wp menu 
+<?php wp_nav_menu(array(
+    'theme_location' => 'main_menu',
+    'container' => false,
+    'items_wrap'=>'<ul class="navbar-nav mr-auto">%3$s</ul>',
+)); ?>
