@@ -28,6 +28,10 @@ if(ICL_LANGUAGE_CODE=='en') {
  } else { if(ICL_LANGUAGE_CODE=='id') { 
     echo '<li class="breadcrumb-item">Berita</li>'; } }
 
+#Languange switcher
+#pilih customize button di wpml dulu
+do_action('wpml_add_language_selector');
+
 //image link
 <?php echo THEME_URI; ?>
 
@@ -41,3 +45,6 @@ if(ICL_LANGUAGE_CODE=='en') {
     'container' => false,
     'items_wrap'=>'<ul class="navbar-nav mr-auto">%3$s</ul>',
 )); ?>
+
+//delete br p cf 7
+define('WPCF7_AUTOP', false );

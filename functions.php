@@ -131,6 +131,22 @@ function add_classes_on_a($ulclass) {
 }
 add_filter('wp_nav_menu','add_classes_on_a');
 
+//change class sub-menu
+function new_submenu_class($menu) {    
+  $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
+  return $menu;      
+}
+
+add_filter('wp_nav_menu','new_submenu_class'); 
+
+//change class li sub-menu
+function new_submenu_li_class($menu) {    
+  $menu = preg_replace('/ class="menu-item-has-children"/','/ class="dropdown" /',$menu);        
+  return $menu;      
+}
+
+add_filter('wp_nav_menu','new_submenu_li_class'); 
+
 //add class active menu
 function special_nav_class ($classes, $item) {
   if (in_array('current-menu-item', $classes) ){
@@ -269,4 +285,104 @@ function language_selector_flags(){
                 echo '</a>';
         }
     }
+}
+
+// Post Type Settings
+function init_post_type() {
+  register_post_type('product', array(
+      'label' => 'Product',
+      'description' => '',
+      'public' => true,
+      'show_ui' => true,
+      'show_in_menu' => true,
+      'menu_icon' => 'dashicons-products',
+      'capability_type' => 'post',
+      'map_meta_cap' => true,
+      'hierarchical' => false,
+      'rewrite' => array('slug' => 'product', 'with_front' => true),
+      'query_var' => true,
+      'supports' => array('title','editor','thumbnail','post-formats','categories'),
+      'labels' => array (
+      'name' => 'Product List',
+      'singular_name' => 'Product List',
+      'menu_name' => 'Product',
+      'add_new' => 'Add Product',
+      'add_new_item' => 'Add New Product',
+      'edit' => 'Edit',
+      'edit_item' => 'Edit Product',
+      'new_item' => 'New Product',
+      'view' => 'View Product',
+      'view_item' => 'View Product',
+      'search_items' => 'Search Product',
+      'not_found' => 'No Product Found',
+      'not_found_in_trash' => 'No Product Found in Trash',
+      'parent' => 'Parent Product',
+      ),
+      'public' => true,
+      'has_archive' => false,
+  ));
+  
+  $category_labels = array(
+      'label' => 'Product Category',
+      'hierarchical' => true,
+      'query_var' => true,
+  );
+
+  register_taxonomy('product_category', 'product', $category_labels);
+}
+add_action('init', 'init_post_type');
+
+// Add the custom column to the post type -- replace product with your CPT slug
+add_filter( 'manage_product_posts_columns', 'itsg_add_custom_column' );
+function itsg_add_custom_column( $columns ) {
+    $columns['product_category'] = 'Category';
+
+    return $columns;
+}
+
+// Add the data to the custom column -- replace product with your CPT slug
+add_action( 'manage_product_posts_custom_column' , 'itsg_add_custom_column_data', 10, 2 );
+function itsg_add_custom_column_data( $column, $post_id ) {
+    switch ( $column ) {
+        case 'Category' :
+            echo get_post_meta( $post_id , '_product_category' , true ); // the data that is displayed in the column
+            break;
+    }
+}
+
+// Make the custom column sortable -- replace product with your CPT slug
+add_filter( 'manage_edit-product_sortable_columns', 'itsg_add_custom_column_make_sortable' );
+function itsg_add_custom_column_make_sortable( $columns ) {
+	$columns['product_category'] = 'Category';
+
+	return $columns;
+}
+
+// Add custom column sort request to post list page
+add_action( 'load-edit.php', 'itsg_add_custom_column_sort_request' );
+function itsg_add_custom_column_sort_request() {
+	add_filter( 'request', 'itsg_add_custom_column_do_sortable' );
+}
+
+// Handle the custom column sorting
+function itsg_add_custom_column_do_sortable( $vars ) {
+
+	// check if post type is being viewed -- replace product with your CPT slug
+	if ( isset( $vars['post_type'] ) && 'product' == $vars['post_type'] ) {
+
+		// check if sorting has been applied
+		if ( isset( $vars['orderby'] ) && 'Category' == $vars['orderby'] ) {
+
+			// apply the sorting to the post list
+			$vars = array_merge(
+				$vars,
+				array(
+					'meta_key' => '_product_category',
+					'orderby' => 'meta_value_num'
+				)
+			);
+		}
+	}
+
+	return $vars;
 }
