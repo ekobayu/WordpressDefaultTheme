@@ -148,6 +148,10 @@ function new_submenu_li_class($menu) {
 add_filter('wp_nav_menu','new_submenu_li_class'); 
 
 //add class active menu
+function remove_active_class($class) {
+  return ( $class == 'active' ) ? FALSE : TRUE;
+}
+
 function special_nav_class ($classes, $item) {
   if (in_array('current-menu-item', $classes) ){
       $classes[] = 'active ';
@@ -161,6 +165,13 @@ function special_nav_class ($classes, $item) {
   else if(is_single() && $item->title == 'Berita'){
       $classes[] = 'current-menu-item active';
   }
+  else if(is_singular( 'product' )){
+    $classes = array_filter( $classes, 'remove_active_class' );
+
+       if( in_array( 'product1', $classes) ) {
+         $classes[] = 'current-menu-item active';
+       }
+ }
   return $classes;
 }
 add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
