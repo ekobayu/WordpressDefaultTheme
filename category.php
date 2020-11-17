@@ -35,7 +35,7 @@ get_header(); ?>
                                         <!-- thumbnail -->
                                         <div class="col-sm-4 col-xs-5">
                                             <div class="post-thumb"> 
-                                                <?php the_post_thumbnail(array(282,197)) ?>
+                                                <?php the_post_thumbnail('full', array('class' => '')); ?>
                                                  <div class="thumb-hover">
                                                     <div class="position-center-center">
                                                         <a href="<?php the_permalink() ?>" class="fa fa-link"></a>

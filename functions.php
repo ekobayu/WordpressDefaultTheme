@@ -397,3 +397,12 @@ function itsg_add_custom_column_do_sortable( $vars ) {
 
 	return $vars;
 }
+
+// remove width and height in images
+add_filter( 'post_thumbnail_html', 'remove_wps_width_attribute', 10 );
+add_filter( 'image_send_to_editor', 'remove_wps_width_attribute', 10 );
+  
+function remove_wps_width_attribute( $html ) {
+    $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+    return $html;
+}
