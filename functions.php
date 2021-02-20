@@ -29,7 +29,7 @@ function default_scripts()
     wp_enqueue_style('default-screen', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array());
     wp_enqueue_style('default-screen1', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css', array());
     wp_enqueue_style('default-screen2', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Vollkorn:400,700', array());
-    wp_enqueue_style('default-screen3', THEME_URI . '/assets/css/style.css', array());
+    wp_enqueue_style('default-screen3', THEME_URI . '/assets/css/style.css', array(), rand(111,9999), 'all');
     wp_enqueue_style('default-screen4', THEME_URI . '/style.css', array());
     wp_enqueue_style('default-screen5', THEME_URI . '/assets/css/theme-768.css', array() , false , '(min-width: 767px)');
     wp_enqueue_style('default-screen6', THEME_URI . '/assets/css/theme-1024.css', array() , false , '(min-width: 1023px)');
