@@ -1,12 +1,10 @@
 
 //repeater acf
-<?php
-if( have_rows('repeater_field_name') ):
+<?php if( have_rows('repeater_field_name') ):
     while ( have_rows('repeater_field_name') ) : the_row();
         the_sub_field('sub_field_name');
     endwhile;
-endif;
-?>
+endif; ?>
 
 // nampilin post
 <?php while (have_posts()) : the_post(); ?>
@@ -48,3 +46,7 @@ do_action('wpml_add_language_selector');
 
 //delete br p cf 7
 define('WPCF7_AUTOP', false );
+
+//image woth array alt text
+<?php $imagePromo = get_field('promo_image_desktop');?>
+<img class='img-fluid d-none d-md-block' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">

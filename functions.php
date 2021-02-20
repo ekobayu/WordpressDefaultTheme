@@ -26,16 +26,16 @@ if( function_exists('acf_add_options_page') ) {
 // Enqueue scripts and styles
 function default_scripts()
 {
-    wp_enqueue_style('default-screen', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array());
-    wp_enqueue_style('default-screen1', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css', array());
+    wp_enqueue_style('default-screen', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css', array());
+    wp_enqueue_style('default-screen1', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css', array());
     wp_enqueue_style('default-screen2', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Vollkorn:400,700', array());
     wp_enqueue_style('default-screen3', THEME_URI . '/assets/css/style.css', array(), rand(111,9999), 'all');
     wp_enqueue_style('default-screen4', THEME_URI . '/style.css', array());
     wp_enqueue_style('default-screen5', THEME_URI . '/assets/css/theme-768.css', array() , false , '(min-width: 767px)');
     wp_enqueue_style('default-screen6', THEME_URI . '/assets/css/theme-1024.css', array() , false , '(min-width: 1023px)');
 
-    wp_enqueue_script('default-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js', array('jquery'), false, true); 
-    wp_enqueue_script('default-script1', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), false, true);
+    wp_enqueue_script('default-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', array('jquery'), false, true); 
+    wp_enqueue_script('default-script1', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js', array('jquery'), false, true);
     wp_enqueue_script('default-script2', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', array('jquery'), false, true);
     wp_enqueue_script('default-script3', THEME_URI . '/assets/js/script.js', array('jquery'), false, true);   
 }
@@ -117,6 +117,12 @@ function setup_menu() {
 }
 setup_menu();
 // Menu Setup
+
+//remove ul
+// function remove_ul ( $menu ){
+//   return preg_replace( array( '#^<ul[^>]*>#', '#</ul>$#' ), '', $menu );
+// }
+// add_filter( 'wp_nav_menu', 'remove_ul' );
 
 //add class on li menu
 function add_classes_on_li($classes, $item, $args) {
