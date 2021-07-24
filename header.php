@@ -17,10 +17,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="" />
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
     <title><?php if(is_front_page()) { echo bloginfo("name"); echo " | "; echo bloginfo("description"); } else { echo bloginfo( 'name' ); echo " | "; echo wp_title("", false); }?></title>
-    <link rel="icon" href="<?php echo THEME_URI; ?>/asset/img/favicon.png">
-	<?php wp_head(); ?>
+    <link rel="icon" href="<?php echo THEME_URI; ?>/assets/img/favicon.png">
+  	<?php wp_head(); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
