@@ -97,7 +97,9 @@
   left: 0;
   height: 103px;
   bottom: 0;
-  background: transparent linear-gradient(180deg, rgba(13, 28, 52, 0) 0, rgba(13, 28, 52, 0.8) 100%) 0 0 no-repeat padding-box;
+  background: transparent
+    linear-gradient(180deg, rgba(13, 28, 52, 0) 0, rgba(13, 28, 52, 0.8) 100%) 0
+    0 no-repeat padding-box;
   border-radius: 7px;
 }
 .home-page .section-2 .item-country .overlay p {
@@ -169,8 +171,14 @@
 .home-page .section-4 .owl-carousel .owl-item .card .card-footer .card-link {
   text-decoration: none;
 }
-.home-page .section-4 .owl-carousel .owl-item .card .card-footer .card-link::after {
-  content: url("../../build/img/arrow-read-more.png");
+.home-page
+  .section-4
+  .owl-carousel
+  .owl-item
+  .card
+  .card-footer
+  .card-link::after {
+  content: url('../../build/img/arrow-read-more.png');
   padding-left: 12px;
 }
 .home-page .section-4 .owl-carousel .owl-prev {
@@ -268,10 +276,10 @@
     text-align: center;
   }
   .home-page .section-2,
-.home-page .section-3,
-.home-page .section-4,
-.home-page .section-5,
-.home-page .section-6 {
+  .home-page .section-3,
+  .home-page .section-4,
+  .home-page .section-5,
+  .home-page .section-6 {
     padding: 50px 0;
   }
   .home-page .section-2 h3 {
@@ -293,7 +301,7 @@
     margin: 0 50px;
   }
   .home-page .section-6 .owl-next,
-.home-page .section-6 .owl-prev {
+  .home-page .section-6 .owl-prev {
     width: 30px;
     height: 30px;
     top: 0%;
@@ -542,7 +550,7 @@
     font-size: 12px;
   }
   .jasa-kami-page .section-4 h2,
-.jasa-kami-page .section-4 h3 {
+  .jasa-kami-page .section-4 h3 {
     font-size: 24px;
   }
   .jasa-kami-page .section-4 button {
@@ -550,7 +558,7 @@
     font-size: 12px;
   }
   .jasa-kami-page .section-4 .left,
-.jasa-kami-page .section-4 .right {
+  .jasa-kami-page .section-4 .right {
     min-height: 300px;
     padding-left: 30px;
     padding-right: 30px;
@@ -659,7 +667,13 @@
   font-size: 18px;
   margin-bottom: 20px;
 }
-.english-page .section-2 .group-card-jasa .modal .modal-content .modal-body img {
+.english-page
+  .section-2
+  .group-card-jasa
+  .modal
+  .modal-content
+  .modal-body
+  img {
   float: left;
   padding-right: 24px;
   padding-bottom: 120px;
@@ -713,7 +727,13 @@
   .english-page .section-2 .group-card-jasa .column img {
     padding-left: 80px;
   }
-  .english-page .section-2 .group-card-jasa .modal .modal-content .modal-body img {
+  .english-page
+    .section-2
+    .group-card-jasa
+    .modal
+    .modal-content
+    .modal-body
+    img {
     float: none;
     padding-bottom: 30px;
   }
@@ -1007,7 +1027,7 @@
   text-decoration: none;
 }
 .news-page .section-2 .card .card-footer .card-link::after {
-  content: url("../../build/img/arrow-read-more.png");
+  content: url('../../build/img/arrow-read-more.png');
   padding-left: 12px;
 }
 .news-page .section-2 .navigation {
@@ -1308,7 +1328,7 @@
   text-decoration: none;
 }
 .single-news-page .section-3 .card .card-footer .card-link::after {
-  content: url("../../build/img/arrow-read-more.png");
+  content: url('../../build/img/arrow-read-more.png');
   padding-left: 12px;
 }
 
@@ -1487,7 +1507,7 @@
     grid-template-columns: 1fr;
   }
   .kontak-kami-page .section-3 .group-location ul,
-.kontak-kami-page .section-3 .group-location table {
+  .kontak-kami-page .section-3 .group-location table {
     font-size: 12px;
   }
   .kontak-kami-page .section-4 .form-kontak .form-label {
@@ -1500,7 +1520,7 @@
   }
 }
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #f2f2f2;
 }
 
@@ -1541,7 +1561,8 @@ header .sub-menu-desktop li a {
   color: #88d6ff;
   font-weight: 600;
 }
-header .sub-menu-desktop li a:hover, header .sub-menu-desktop li a:focus {
+header .sub-menu-desktop li a:hover,
+header .sub-menu-desktop li a:focus {
   color: #9fd6f3;
 }
 header .main-menu-desktop {
@@ -1552,6 +1573,11 @@ header .main-menu-desktop {
 header .main-menu-desktop li a {
   font-weight: 400;
   font-size: 15px;
+  color: white;
+}
+header .main-menu-desktop li a:hover,
+header .main-menu-desktop li a:focus {
+  color: #dddcdc;
 }
 header .main-menu-desktop .dropdown-menu {
   background-color: #313437;
@@ -1559,11 +1585,20 @@ header .main-menu-desktop .dropdown-menu {
   padding: 0 0px;
   border-radius: 0px 0px 15px 15px;
 }
-header .main-menu-desktop .dropdown-menu .dropdown-item {
+header .main-menu-desktop .dropdown-menu a {
   color: white;
   padding: 0.5rem 2rem;
+  display: block;
+  width: 100%;
+  clear: both;
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
 }
-header .main-menu-desktop .dropdown-menu .dropdown-item:hover, header .main-menu-desktop .dropdown-menu .dropdown-item:focus {
+header .main-menu-desktop .dropdown-menu a:hover,
+header .main-menu-desktop .dropdown-menu a:focus {
   background-color: transparent;
   font-weight: 700;
 }
@@ -1692,11 +1727,20 @@ footer .c-footer .menu-copyright ul li a {
     margin: 0 auto;
     margin-bottom: 20px;
   }
-  nav .main-menu-mobile .dropdown-menu .dropdown-item {
+  nav .main-menu-mobile .dropdown-menu a {
     color: white;
     padding: 0.4rem 1rem;
+    display: block;
+    width: 100%;
+    clear: both;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
   }
-  nav .main-menu-mobile .dropdown-menu .dropdown-item:hover, nav .main-menu-mobile .dropdown-menu .dropdown-item:focus {
+  nav .main-menu-mobile .dropdown-menu a:hover,
+  nav .main-menu-mobile .dropdown-menu a:focus {
     background-color: transparent;
     font-weight: 700;
   }
@@ -1706,8 +1750,8 @@ footer .c-footer .menu-copyright ul li a {
     padding-bottom: 0px;
   }
   footer .sub-footer .left,
-footer .sub-footer .center,
-footer .sub-footer .right {
+  footer .sub-footer .center,
+  footer .sub-footer .right {
     border-bottom: 1px solid white;
     margin-bottom: 24px;
     padding-bottom: 30px;

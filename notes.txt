@@ -1,22 +1,55 @@
-
-//repeater acf
-<?php if( have_rows('repeater_field_name') ):
-    while ( have_rows('repeater_field_name') ) : the_row();
-        the_sub_field('sub_field_name');
-    endwhile;
-endif; ?>
-
-// nampilin post
-<?php while (have_posts()) : the_post(); ?>
-      <div class="wrap-about-project">
-           <?php the_content(); ?>
-       </div>
-<?php endwhile; ?>
-
 // acf shortcode
 <?php the_field('top_header_instagram', 'options'); ?>
 <?php the_sub_field('sub_field_name'); ?>
 <?php the_field('email_address'); ?>
+
+//image link
+<?php echo THEME_URI; ?>
+
+//repeater acf options
+<?php
+  if( have_rows('description_jam_operasional', 'options') ):
+      while ( have_rows('description_jam_operasional', 'options') ) : the_row(); ?>
+          <tr>
+            <td><?php the_sub_field('hari'); ?></td>
+            <td>&nbsp;<?php the_sub_field('jam'); ?></td>
+        </tr>
+      <?php endwhile;
+  endif;
+?>
+
+//repeater acf
+<?php if( have_rows('slideshow') ):
+  while ( have_rows('slideshow') ) : the_row(); ?>
+    <?php $imageHomeSlide = get_sub_field('image_slide');?>
+    <div class="slide">
+      <a href="<?php the_sub_field('link_url'); ?>">
+        <img class='img-fluid' src="<?php echo esc_url($imageHomeSlide['url']); ?>" alt="<?php echo esc_url($imageHomeSlide['alt']); ?>" />
+      </a>
+    </div>
+  <?php endwhile;
+endif; ?>
+
+// nampilin post
+<?php while (have_posts()) : the_post(); ?>
+    <div class="wrap-about-project">
+      <?php the_content(); ?>
+    </div>
+<?php endwhile; ?>
+
+// nampilin list news post
+<?php 
+  $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+  $customgs = array(
+    'posts_per_page' => 6,
+    'post_type' => 'post',
+    'paged' => $paged,
+    'order' => 'DESC',
+  );
+  query_posts($customgs); 
+    if (have_posts()): while(have_posts()): the_post(); ?>
+
+<?php endwhile; endif; ?>
 
 //wpml code string
 <?php _e('CONTACT US','label') ?>
@@ -29,9 +62,6 @@ if(ICL_LANGUAGE_CODE=='en') {
 #Languange switcher
 #pilih customize button di wpml dulu
 do_action('wpml_add_language_selector');
-
-//image link
-<?php echo THEME_URI; ?>
 
 //check if field empty
 <?php if(! empty(get_sub_field('timeline_image') )) { ?>
@@ -47,9 +77,25 @@ do_action('wpml_add_language_selector');
 //delete br p cf 7
 define('WPCF7_AUTOP', false );
 
-//image woth array alt text
+//image with array alt text
 <?php $imagePromo = get_field('promo_image_desktop');?>
 <img class='img-fluid d-none d-md-block' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
 // do shortcode
- <?php echo do_shortcode('[contact-form-7 id="139" title="Contact form 1"]'); ?>
+<?php echo do_shortcode('[contact-form-7 id="139" title="Contact form 1"]'); ?>
+
+// Get categories list
+<?php
+$categories = get_categories( array(
+    'orderby' => 'name',
+    'order'   => 'ASC',
+) );
+foreach( $categories as $category ) {
+    $category_link = sprintf( 
+        '<a href="%1$s">%3$s</a>',
+        esc_url( get_category_link( $category->term_id ) ),
+        esc_attr( sprintf( __( '%s', 'myedu' ), $category->name ) ),
+        esc_html( $category->name )
+    );
+    echo '<li>' . sprintf( esc_html__( '%s', 'myedu' ), $category_link ) . '</li>';
+} ?> 

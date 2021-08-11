@@ -136,7 +136,7 @@ add_filter('nav_menu_css_class','add_classes_on_li',1,3);
 
 //add class on a menu
 function add_classes_on_a($ulclass) {
-  return preg_replace('/<a/', '<a class="nav-link pr-3 pl-3"', $ulclass, -1);
+  return preg_replace('/<a/', '<a class="nav-link"', $ulclass, -1);
 }
 add_filter('wp_nav_menu','add_classes_on_a');
 
@@ -145,7 +145,6 @@ function new_submenu_class($menu) {
   $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
   return $menu;      
 }
-
 add_filter('wp_nav_menu','new_submenu_class'); 
 
 //change class li sub-menu
@@ -153,7 +152,6 @@ function new_submenu_li_class($menu) {
   $menu = preg_replace('/ class="menu-item-has-children"/','/ class="dropdown" /',$menu);        
   return $menu;      
 }
-
 add_filter('wp_nav_menu','new_submenu_li_class'); 
 
 //add class active menu
@@ -177,9 +175,9 @@ function special_nav_class ($classes, $item) {
   else if(is_singular( 'product' )){
     $classes = array_filter( $classes, 'remove_active_class' );
 
-       if( in_array( 'product1', $classes) ) {
-         $classes[] = 'current-menu-item active';
-       }
+    if( in_array( 'product1', $classes) ) {
+      $classes[] = 'current-menu-item active';
+    }
  }
   return $classes;
 }
@@ -218,6 +216,15 @@ remove_action('wp_head', 'wp_generator');
 /**
  * Disable the emoji's
  */
+
+function disable_emojis_tinymce( $plugins ) {
+  if ( is_array( $plugins ) ) {
+      return array_diff( $plugins, array( 'wpemoji' ) );
+  } else {
+      return array();
+  }
+}
+
 function disable_emojis() {
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
     remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
@@ -229,20 +236,6 @@ function disable_emojis() {
     add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 }
 add_action( 'init', 'disable_emojis' );
-
-/**
- * Filter function used to remove the tinymce emoji plugin.
- * 
- * @param    array  $plugins  
- * @return   array             Difference betwen the two arrays
- */
-function disable_emojis_tinymce( $plugins ) {
-    if ( is_array( $plugins ) ) {
-        return array_diff( $plugins, array( 'wpemoji' ) );
-    } else {
-        return array();
-    }
-}
 
 // Remove comment-reply.min.js from footer
 function comments_clean_header_hook(){
@@ -292,19 +285,19 @@ function get_breadcrumb() {
 }
 
 function language_selector_flags(){
-        $languages = icl_get_languages('skip_missing=0&orderby=code');
-            if(!empty($languages)){
-                foreach($languages as $l){
-                if($l['active']) {
-                echo '<a class="active" href="'.$l['url'].'">';
-                }
-                else{
-                echo '<a class="nav-link" href="'.$l['url'].'">';
-                }
-                echo $l['language_code'];
-                echo '</a>';
+    $languages = icl_get_languages('skip_missing=0&orderby=code');
+      if(!empty($languages)){
+        foreach($languages as $l){
+        if($l['active']) {
+          echo '<a class="active" href="'.$l['url'].'">';
         }
+        else{
+          echo '<a class="nav-link" href="'.$l['url'].'">';
+        }
+        echo $l['language_code'];
+        echo '</a>';
     }
+  }
 }
 
 // Post Type Settings
