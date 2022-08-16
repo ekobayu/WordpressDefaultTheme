@@ -99,3 +99,7 @@ foreach( $categories as $category ) {
     );
     echo '<li>' . sprintf( esc_html__( '%s', 'myedu' ), $category_link ) . '</li>';
 } ?> 
+
+// template hierarchy
+// home.php buat blog di settingan post page reading
+https://codex.wordpress.org/images/9/96/wp-template-hierarchy.jpg

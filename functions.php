@@ -27,18 +27,17 @@ if( function_exists('acf_add_options_page') ) {
 function default_scripts()
 {
   wp_enqueue_style('default-screen', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap', array());
-  wp_enqueue_style('default-screen1', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css', array());
-  wp_enqueue_style('default-screen2', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', array());
-  wp_enqueue_style('default-screen3', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', array());
-  wp_enqueue_style('default-screen4', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css', array());
-  wp_enqueue_style('default-screen5', THEME_URI . '/assets/css/style.css', array(), rand(111,9999), 'all');
-  wp_enqueue_style('default-screen6', THEME_URI . '/style.css', array());
+  wp_enqueue_style('default-screen1', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css', array());
+  wp_enqueue_style('default-screen2', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css', array());
+  wp_enqueue_style('default-screen3', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css', array());
+  wp_enqueue_style('default-screen4', THEME_URI . '/assets/css/style.css', array(), rand(111,9999), 'all');
+  wp_enqueue_style('default-screen5', THEME_URI . '/style.css', array());
 
   wp_enqueue_script('default-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', array('jquery'), false, true); 
-  wp_enqueue_script('default-script1', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js', array('jquery'), false, true); 
-  wp_enqueue_script('default-script2', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js', array('jquery'), false, true); 
+  wp_enqueue_script('default-script1', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.5/umd/popper.min.js', array('jquery'), false, true); 
+  wp_enqueue_script('default-script2', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js', array('jquery'), false, true); 
   wp_enqueue_script('default-script3', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.min.js', array('jquery'), false, true); 
-  wp_enqueue_script('default-script4', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), false, true);
+  wp_enqueue_script('default-script4', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array('jquery'), false, true);
   wp_enqueue_script('default-script5', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', array('jquery'), false, true);
   wp_enqueue_script('default-script6', THEME_URI . '/assets/js/custom.js', array('jquery'), false, true);   
 }
@@ -121,11 +120,11 @@ function setup_menu() {
 setup_menu();
 // Menu Setup
 
-//remove ul
-// function remove_ul ( $menu ){
-//   return preg_replace( array( '#^<ul[^>]*>#', '#</ul>$#' ), '', $menu );
-// }
-// add_filter( 'wp_nav_menu', 'remove_ul' );
+//remove ul in nav menu
+function remove_ul ( $menu ){
+  return preg_replace( array( '#^<ul[^>]*>#', '#</ul>$#' ), '', $menu );
+}
+add_filter( 'wp_nav_menu', 'remove_ul' );
 
 //add class on li menu
 function add_classes_on_li($classes, $item, $args) {
@@ -140,19 +139,19 @@ function add_classes_on_a($ulclass) {
 }
 add_filter('wp_nav_menu','add_classes_on_a');
 
-//change class sub-menu
-function new_submenu_class($menu) {    
-  $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
-  return $menu;      
-}
-add_filter('wp_nav_menu','new_submenu_class'); 
+// //change class sub-menu
+// function new_submenu_class($menu) {    
+//   $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
+//   return $menu;      
+// }
+// add_filter('wp_nav_menu','new_submenu_class'); 
 
-//change class li sub-menu
-function new_submenu_li_class($menu) {    
-  $menu = preg_replace('/ class="menu-item-has-children"/','/ class="dropdown" /',$menu);        
-  return $menu;      
-}
-add_filter('wp_nav_menu','new_submenu_li_class'); 
+// //change class li sub-menu
+// function new_submenu_li_class($menu) {    
+//   $menu = preg_replace('/ class="menu-item-has-children"/','/ class="dropdown" /',$menu);        
+//   return $menu;      
+// }
+// add_filter('wp_nav_menu','new_submenu_li_class'); 
 
 //add class active menu
 function remove_active_class($class) {
