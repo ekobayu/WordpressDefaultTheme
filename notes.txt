@@ -21,10 +21,10 @@
 //repeater acf
 <?php if( have_rows('slideshow') ):
   while ( have_rows('slideshow') ) : the_row(); ?>
-    <?php $imageHomeSlide = get_sub_field('image_slide');?>
+    <?php $imageSlide = get_sub_field('image_slide');?>
     <div class="slide">
       <a href="<?php the_sub_field('link_url'); ?>">
-        <img class='img-fluid' src="<?php echo esc_url($imageHomeSlide['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+        <img class='img-fluid' src="<?php echo esc_url($imageSlide['url']); ?>" alt="<?php echo esc_attr($imageSlide['alt']); ?>" />
       </a>
     </div>
   <?php endwhile;
