@@ -171,13 +171,13 @@ function special_nav_class ($classes, $item) {
   else if(is_single() && $item->title == 'Berita'){
       $classes[] = 'current-menu-item active';
   }
-  else if(is_singular( 'product' )){
-    $classes = array_filter( $classes, 'remove_active_class' );
+  // else if(is_singular( 'product' )){
+  //   $classes = array_filter( $classes, 'remove_active_class' );
 
-    if( in_array( 'product1', $classes) ) {
-      $classes[] = 'current-menu-item active';
-    }
- }
+  //   if( in_array( 'product1', $classes) ) {
+  //     $classes[] = 'current-menu-item active';
+  //   }
+  // }
   return $classes;
 }
 add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
@@ -189,16 +189,16 @@ function hide_editor() {
   $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
   if( !isset( $post_id ) ) return;
   // Hide the editor on the page titled 'Homepage'
-  $homepgname = get_the_title($post_id);
-  if($homepgname == 'Home'){ 
+  $pagename = get_the_title($post_id);
+  if($pagename == 'Home'){ 
     remove_post_type_support('page', 'editor');
   }
   // Hide the editor on a page with a specific page template
   // Get the name of the Page Template file.
-  $template_file = get_post_meta($post_id, '_wp_page_template', true);
-  if($template_file == 'my-page-template.php'){ // the filename of the page template
-    remove_post_type_support('page', 'editor');
-  }
+  // $template_file = get_post_meta($post_id, '_wp_page_template', true);
+  // if($template_file == 'my-page-template.php'){ // the filename of the page template
+  //   remove_post_type_support('page', 'editor');
+  // }
 }
 
 // remove wp version in css and js
@@ -283,21 +283,21 @@ function get_breadcrumb() {
     }
 }
 
-function language_selector_flags(){
-    $languages = icl_get_languages('skip_missing=0&orderby=code');
-      if(!empty($languages)){
-        foreach($languages as $l){
-        if($l['active']) {
-          echo '<a class="active" href="'.$l['url'].'">';
-        }
-        else{
-          echo '<a class="nav-link" href="'.$l['url'].'">';
-        }
-        echo $l['language_code'];
-        echo '</a>';
-    }
-  }
-}
+// function language_selector_flags(){
+//     $languages = icl_get_languages('skip_missing=0&orderby=code');
+//       if(!empty($languages)){
+//         foreach($languages as $l){
+//         if($l['active']) {
+//           echo '<a class="active" href="'.$l['url'].'">';
+//         }
+//         else{
+//           echo '<a class="nav-link" href="'.$l['url'].'">';
+//         }
+//         echo $l['language_code'];
+//         echo '</a>';
+//     }
+//   }
+// }
 
 // Post Type Settings
 function init_post_type() {
@@ -317,15 +317,15 @@ function init_post_type() {
       'labels' => array (
       'name' => 'Product List',
       'singular_name' => 'Product List',
-      'menu_name' => 'Product',
-      'add_new' => 'Add Product',
-      'add_new_item' => 'Add New Product',
+      'menu_name' => 'All Products',
+      'add_new' => 'Add New',
+      'add_new_item' => 'Add New',
       'edit' => 'Edit',
       'edit_item' => 'Edit Product',
       'new_item' => 'New Product',
       'view' => 'View Product',
       'view_item' => 'View Product',
-      'search_items' => 'Search Product',
+      'search_items' => 'Search Products',
       'not_found' => 'No Product Found',
       'not_found_in_trash' => 'No Product Found in Trash',
       'parent' => 'Parent Product',
@@ -335,69 +335,16 @@ function init_post_type() {
   ));
   
   $category_labels = array(
-      'label' => 'Product Category',
+      'label' => 'Categories',
       'hierarchical' => true,
       'query_var' => true,
+      'show_admin_column' => true,
   );
 
-  register_taxonomy('product_category', 'product', $category_labels);
+  register_taxonomy('products', 'product', $category_labels); 
+  // products yg dipakai buat dapetin category
 }
 add_action('init', 'init_post_type');
-
-// Add the custom column to the post type -- replace product with your CPT slug
-add_filter( 'manage_product_posts_columns', 'itsg_add_custom_column' );
-function itsg_add_custom_column( $columns ) {
-    $columns['product_category'] = 'Category';
-
-    return $columns;
-}
-
-// Add the data to the custom column -- replace product with your CPT slug
-add_action( 'manage_product_posts_custom_column' , 'itsg_add_custom_column_data', 10, 2 );
-function itsg_add_custom_column_data( $column, $post_id ) {
-    switch ( $column ) {
-        case 'Category' :
-            echo get_post_meta( $post_id , '_product_category' , true ); // the data that is displayed in the column
-            break;
-    }
-}
-
-// Make the custom column sortable -- replace product with your CPT slug
-add_filter( 'manage_edit-product_sortable_columns', 'itsg_add_custom_column_make_sortable' );
-function itsg_add_custom_column_make_sortable( $columns ) {
-	$columns['product_category'] = 'Category';
-
-	return $columns;
-}
-
-// Add custom column sort request to post list page
-add_action( 'load-edit.php', 'itsg_add_custom_column_sort_request' );
-function itsg_add_custom_column_sort_request() {
-	add_filter( 'request', 'itsg_add_custom_column_do_sortable' );
-}
-
-// Handle the custom column sorting
-function itsg_add_custom_column_do_sortable( $vars ) {
-
-	// check if post type is being viewed -- replace product with your CPT slug
-	if ( isset( $vars['post_type'] ) && 'product' == $vars['post_type'] ) {
-
-		// check if sorting has been applied
-		if ( isset( $vars['orderby'] ) && 'Category' == $vars['orderby'] ) {
-
-			// apply the sorting to the post list
-			$vars = array_merge(
-				$vars,
-				array(
-					'meta_key' => '_product_category',
-					'orderby' => 'meta_value_num'
-				)
-			);
-		}
-	}
-
-	return $vars;
-}
 
 // remove width and height in images
 add_filter( 'post_thumbnail_html', 'remove_wps_width_attribute', 10 );

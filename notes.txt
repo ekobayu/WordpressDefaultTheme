@@ -103,3 +103,11 @@ foreach( $categories as $category ) {
 // template hierarchy
 // home.php buat blog di settingan post page reading
 https://codex.wordpress.org/images/9/96/wp-template-hierarchy.jpg
+
+// get category custom post post_type
+<?php
+$terms = get_the_terms( $post->ID , 'products' );
+foreach ( $terms as $term ) {
+  echo $term->name;
+}
+?>
