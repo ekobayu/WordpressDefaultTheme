@@ -114,7 +114,6 @@ function setup_menu() {
     register_nav_menus(array(
         'main_menu' => 'Home',
         'footer_menu' => 'Footer',
-        'mobile_menu' => 'Mobile',
     ), '');
 }
 setup_menu();
@@ -174,9 +173,10 @@ function special_nav_class ($classes, $item) {
   // else if(is_singular( 'product' )){
   //   $classes = array_filter( $classes, 'remove_active_class' );
 
-  //   if( in_array( 'product1', $classes) ) {
+  //   if( in_array( 'product-menu', $classes) ) {
   //     $classes[] = 'current-menu-item active';
   //   }
+  //    // add class product-menu in admin
   // }
   return $classes;
 }
