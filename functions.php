@@ -258,29 +258,41 @@ function custom_menu_page_removing() {
 }
 add_action( 'admin_menu', 'custom_menu_page_removing' );
 
+
 function get_breadcrumb() {
-    echo '<li class="breadcrumb-item"><a href="'.home_url().'" rel="nofollow">Home</a></li>';
-    if (is_category() || is_single()) {
-        $category_detail=get_the_category($post->ID);
+  echo '<li class="breadcrumb-item"><a href="'.home_url().'" rel="nofollow">Home</a></li>';
+  if (is_category() || is_single()) {
+      $category_detail=get_the_category($post->ID);
+      $terms = get_the_terms( $post->ID , 'products' );
+      
+      if (empty($category_detail)) {
+        echo '<li class="breadcrumb-item">';
+        foreach ( $terms as $term ){
+        echo ' ';
+        echo $term->name; }
+        echo '</li>';
+      }
+      else {
         echo '<li class="breadcrumb-item">';
         foreach($category_detail as $cd){
-          echo ' ';
-          echo $cd->cat_name; }
+        echo ' ';
+        echo $cd->cat_name; }
         echo '</li>';
-      if (is_single()) {
-          echo '<li class="breadcrumb-item">';
-          the_title();
-          echo '</li>';
       }
-    } elseif (is_page()) {
-        echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;";
-        echo the_title();
-    } elseif (is_search()) {
-        echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;Search Results for... ";
-        echo '"<em>';
-        echo the_search_query();
-        echo '</em>"';
+    if (is_single()) {
+        echo '<li class="breadcrumb-item">';
+        the_title();
+        echo '</li>';
     }
+  } elseif (is_page()) {
+      echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;";
+      echo the_title();
+  } elseif (is_search()) {
+      echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;Search Results for... ";
+      echo '"<em>';
+      echo the_search_query();
+      echo '</em>"';
+  }
 }
 
 // function language_selector_flags(){
