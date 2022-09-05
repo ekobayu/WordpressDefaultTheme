@@ -1,6 +1,6 @@
 <?php
 /**
- * The blog page template file
+ * The sub category custom post template file
  *
  * If the user has selected a static page for their homepage, this is what will
  * appear.
