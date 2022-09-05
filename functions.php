@@ -57,8 +57,12 @@ function custom_pagination() {
             'prev_next' => false,
             'type'  => 'array',
             'prev_next'   => TRUE,
-            'prev_text'    => __('<span aria-hidden="true">prev</span>'),
-            'next_text'    => __('<span aria-hidden="true">next</span>'),
+            'prev_text'    => __('<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg></span>'),
+            'next_text'    => __('<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg></span>'),
         ) );
     $output = '';
 
@@ -268,9 +272,9 @@ function get_breadcrumb() {
       if (empty($category_detail)) {
         echo '<li class="breadcrumb-item">';
         foreach ( $terms as $term ){
-        echo ' ';
+        echo '<a href="'.get_term_link($term).'">';
         echo $term->name; }
-        echo '</li>';
+        echo '</a></li>';
       }
       else {
         echo '<li class="breadcrumb-item">';
@@ -285,8 +289,13 @@ function get_breadcrumb() {
         echo '</li>';
     }
   } elseif (is_page()) {
-      echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;";
+      echo '<li class="breadcrumb-item">';
       echo the_title();
+      echo '</li>';
+  } elseif (is_home()) {
+      echo '<li class="breadcrumb-item">';
+      echo 'Blog';
+      echo '</li>';
   } elseif (is_search()) {
       echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;Search Results for... ";
       echo '"<em>';
@@ -347,7 +356,7 @@ function init_post_type() {
   ));
   
   $category_labels = array(
-      'label' => 'Categories',
+      'label' => 'Products Categories',
       'hierarchical' => true,
       'query_var' => true,
       'show_admin_column' => true,
@@ -357,6 +366,40 @@ function init_post_type() {
   // products yg dipakai buat dapetin category
 }
 add_action('init', 'init_post_type');
+
+/**
+ * Force Taxonomy Subcategories to new template
+ *
+ * @param String $template - Expected template path
+ *
+ * @return String $template
+ */
+function taxonomy_subcategory_template( $template ) {
+
+  // We're not on a taxonomy page
+  if( ! ( is_tax() && is_tax( 'products' ) ) ) {
+      return $template;
+  }
+
+  // Grab the queried object, _should_ be a term but make sure.
+  $queried_object = get_queried_object();
+
+  // We either don't have the right object OR we're on a top level category becuase $term->parent === 0
+  if( isset( $queried_object->parent ) && empty( $queried_object->parent ) ) {
+      return $template;
+  }
+
+  // Our template could be located anywhere, we could store it in a subdirectory but 
+  // we would need to specify a relative path from the theme root to it.
+  // Example: 'templates/brand-subcategories.php'
+  if( false !== ( $new_template = locate_template( 'taxonomy-subcategory.php' ) ) ) {
+      $template = $new_template;
+  }
+
+  return $template;
+
+}
+add_filter( 'template_include', 'taxonomy_subcategory_template' );
 
 // remove width and height in images
 add_filter( 'post_thumbnail_html', 'remove_wps_width_attribute', 10 );
