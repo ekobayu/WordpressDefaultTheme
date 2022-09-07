@@ -199,10 +199,19 @@ function hide_editor() {
   }
   // Hide the editor on a page with a specific page template
   // Get the name of the Page Template file.
-  // $template_file = get_post_meta($post_id, '_wp_page_template', true);
-  // if($template_file == 'my-page-template.php'){ // the filename of the page template
-  //   remove_post_type_support('page', 'editor');
-  // }
+  $template_file = get_post_meta($post_id, '_wp_page_template', true);
+  if($template_file == 'front-page.php'){ // the filename of the page template
+    remove_post_type_support('page', 'editor');
+  }
+  if($template_file == 'page-about.php'){ 
+    remove_post_type_support('page', 'editor');
+  }
+  if($template_file == 'page-contact.php'){ 
+    remove_post_type_support('page', 'editor');
+  }
+  if($template_file == 'home.php'){ 
+    remove_post_type_support('page', 'editor');
+  }
 }
 
 // remove wp version in css and js
@@ -249,7 +258,6 @@ add_action('init','comments_clean_header_hook');
 // Remove some admin menu
 function custom_menu_page_removing() {
   // remove_menu_page( 'index.php' );                  //Dashboard
-  // remove_menu_page( 'jetpack' );                    //Jetpack* 
   // remove_menu_page( 'edit.php' );                   //Posts
   // remove_menu_page( 'upload.php' );                 //Media
   // remove_menu_page( 'edit.php?post_type=page' );    //Pages
@@ -297,10 +305,14 @@ function get_breadcrumb() {
       echo 'Blog';
       echo '</li>';
   } elseif (is_search()) {
-      echo "&nbsp;&nbsp;&#47;&nbsp;&nbsp;Search Results for... ";
-      echo '"<em>';
-      echo the_search_query();
-      echo '</em>"';
+    echo '<li class="breadcrumb-item">';
+    echo 'Search';
+    // echo the_search_query();
+    echo '</li>';
+  } elseif (is_archive()) {
+    echo '<li class="breadcrumb-item">';
+    echo 'Archive';
+    echo '</li>';
   }
 }
 
