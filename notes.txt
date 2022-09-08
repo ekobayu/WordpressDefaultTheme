@@ -6,6 +6,10 @@
 //image link
 <?php echo THEME_URI; ?>
 
+//image with array alt text
+<?php $imagePromo = get_field('promo_image_desktop');?>
+<img class='img-fluid d-none d-md-block' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
+
 //repeater acf options
 <?php
   if( have_rows('description_jam_operasional', 'options') ):
@@ -29,6 +33,37 @@
     </div>
   <?php endwhile;
 endif; ?>
+
+// repetaer acf with count
+<?php if( have_rows('list_faq') ):
+  $count = 0;
+  while ( have_rows('list_faq') ) : the_row(); ?>
+    <div class="accordion" id="<?php the_sub_field('topic'); ?>">
+      <h3><?php the_sub_field('topic'); ?></h3>
+      
+      <?php if( have_rows('list_question') ):
+        $countQuestion = 1;
+        while ( have_rows('list_question') ) : the_row(); ?>
+            <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-<?php echo $count; ?><?php echo $countQuestion; ?>" aria-expanded="false" aria-controls="#faq-<?php echo $count; ?><?php echo $countQuestion; ?>">
+              <?php the_sub_field('question_title'); ?>
+              </button>
+            </h2>
+            <div id="faq-<?php echo $count; ?><?php echo $countQuestion; ?>" class="accordion-collapse collapse" aria-labelledby="<?php the_sub_field('question_title'); ?>" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+              <?php the_sub_field('question_answer'); ?>
+              </div>
+            </div>
+          </div>
+        <?php $countQuestion++; ?>
+        <?php endwhile;
+      endif; ?>
+
+    </div>
+  <?php $count++; ?>
+  <?php endwhile;
+endif; ?> 
 
 // nampilin post
 <?php while (have_posts()) : the_post(); ?>
@@ -76,10 +111,6 @@ do_action('wpml_add_language_selector');
 
 //delete br p cf 7
 define('WPCF7_AUTOP', false );
-
-//image with array alt text
-<?php $imagePromo = get_field('promo_image_desktop');?>
-<img class='img-fluid d-none d-md-block' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
 // do shortcode
 <?php echo do_shortcode('[contact-form-7 id="139" title="Contact form 1"]'); ?>

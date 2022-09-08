@@ -33,45 +33,32 @@ $(".scroll").on("click touchstart", function (event) {
 });
 
 $(document).ready(function() {
-  $('.carousel-news').owlCarousel({
-    loop: true,
-    margin: 10,
-    responsiveClass: true,
-    nav: true,
+  // slick home carousel
+  $('.center').slick({
+    centerMode: false,
+    slidesToShow: 3,
+    slidesToScroll: 1,
     dots: false,
-    responsive: {
-      0: {
-        items: 1,
+    variableWidth: true,
+    prevArrow:"<button type='button' class='slick-prev pull-left'></button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'></button>",
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 3
+        }
       },
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 3,
-        loop: false,
-        margin: 20
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 2
+        }
       }
-    }
-  })
-
-  $('.carousel-partner').owlCarousel({
-    loop: true,
-    margin: 10,
-    responsiveClass: true,
-    nav: true,
-    dots: false,
-    responsive: {
-      0: {
-        items: 3,
-      },
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 5,
-        loop: false,
-        margin: 20
-      }
-    }
-  })
+    ]
+  });
 })
