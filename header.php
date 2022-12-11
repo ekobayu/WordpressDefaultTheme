@@ -15,10 +15,10 @@
 ?><!doctype html>
 <html class="no-js" lang="en">
 <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta content='IE=edge' http-equiv='X-UA-Compatible'>
-    <!-- <title><?php if(is_front_page()) { echo bloginfo("name"); echo " | "; echo bloginfo("description"); } else { echo bloginfo( 'name' ); echo " | "; echo wp_title("", false); }?></title> -->
     <link rel="icon" href="<?php echo THEME_URI; ?>/assets/img/favicon.png">
   	<?php wp_head(); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

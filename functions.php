@@ -67,7 +67,11 @@ function custom_pagination() {
     $output = '';
 
     if( is_array( $pages ) ) {
-        $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var( 'paged' );
+        if(is_front_page()) {
+          $paged = ( get_query_var('page') == 0 ) ? 1 : get_query_var( 'page' );
+        }else {
+          $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var( 'paged' );
+        }
 
         $output .=  '<ul class="pagination">';
         foreach ( $pages as $page ) {
@@ -98,18 +102,6 @@ function custom_pagination() {
 
     }
     return $output;
-    // if( is_array( $pages ) ) {
-    //     $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
-    //     echo '<ul class="pagination mb-30">';
-    //     foreach ( $pages as $page ) {
-    //         if (strpos($page, 'current') !== false) {
-    //             echo "<li class='active'>$page</li>"; }
-    //             else {
-    //             echo "<li>$page</li>"; 
-    //             }
-    //     }
-    //     echo '</ul>';
-    // }
 }
 // Pagination Setup
 

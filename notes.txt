@@ -101,6 +101,7 @@ do_action('wpml_add_language_selector');
 //check if field empty
 <?php if(! empty(get_sub_field('timeline_image') )) { ?>
 <?php if(! empty(get_field('timeline_image') )) { ?>
+<?php if(! empty(get_field('facebook', 'options') )) { ?>
 
 //wp menu 
 <?php wp_nav_menu(array(
@@ -133,6 +134,7 @@ foreach( $categories as $category ) {
 
 // template hierarchy
 // home.php buat blog di settingan post page reading
+// front-page.php buat home di settingan reading home
 https://codex.wordpress.org/images/9/96/wp-template-hierarchy.jpg
 
 // get category custom post post_type
@@ -142,3 +144,7 @@ foreach ( $terms as $term ) {
   echo $term->name;
 }
 ?>
+
+// screenshot size 
+1200 x 900
+format jpg
