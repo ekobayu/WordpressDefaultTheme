@@ -18,6 +18,7 @@
 <html class="no-js" lang="en">
 
 <head>
+  <title>Wordpress Default Theme</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -152,7 +153,7 @@
             <div class="input-group col-md-12">
               <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" style="width:60px; height:48px;">
-                  <img src="<?= get_template_directory_uri() ?>/assets/images/search/search.png" style="margin-bottom:5px; ">
+                  <img src="<?= get_template_directory_uri() ?>/assets/images/search/search.png" style="margin-bottom:5px; " alt='search'>
                 </button>
               </span>
               <form action="/" method="get">
