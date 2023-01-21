@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The category custom post template file
  *

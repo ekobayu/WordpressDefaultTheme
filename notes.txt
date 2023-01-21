@@ -8,7 +8,7 @@
 
 //image with array alt text
 <?php $imagePromo = get_field('promo_image_desktop');?>
-<img class='img-fluid d-none d-md-block' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
+<img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
 //repeater acf options
 <?php
@@ -64,6 +64,13 @@ endif; ?>
   <?php $count++; ?>
   <?php endwhile;
 endif; ?> 
+
+// count genap atau ganjil
+ <?php if($count %2 !=0): ?> 
+ <?php echo 'text-center'; ?> 
+ <?php else: ?> 
+ <?php echo 'order-md-2'; ?> 
+ <?php endif; ?>"
 
 // nampilin post
 <?php while (have_posts()) : the_post(); ?>

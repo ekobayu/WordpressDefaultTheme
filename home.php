@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The blog page template file
  *
