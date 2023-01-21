@@ -25,7 +25,7 @@ if (function_exists('acf_add_options_page')) {
 // Option Page
 
 // Enqueue scripts and styles
-function default_scripts()
+function defaultScripts()
 {
   wp_enqueue_style('default-screen', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap', array());
   wp_enqueue_style('default-screen1', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css', array());
@@ -43,7 +43,7 @@ function default_scripts()
   wp_enqueue_script('default-script6', THEME_URI . '/assets/js/custom.js', array('jquery'), false, true);
 }
 
-add_action('wp_enqueue_scripts', 'default_scripts');
+add_action('wp_enqueue_scripts', 'defaultScripts');
 // Enqueue scripts and styles
 
 // Pagination Setup
@@ -109,59 +109,59 @@ function custom_pagination()
 // Pagination Setup
 
 // Menu Setup
-function setup_menu()
+function setupMenu()
 {
   register_nav_menus(array(
     'main_menu' => 'Home',
     'footer_menu' => 'Footer',
   ), '');
 }
-setup_menu();
+setupMenu();
 // Menu Setup
 
 //remove ul in nav menu
-function remove_ul($menu)
+function removeUl($menu)
 {
   return preg_replace(array('#^<ul[^>]*>#', '#</ul>$#'), '', $menu);
 }
-add_filter('wp_nav_menu', 'remove_ul');
+add_filter('wp_nav_menu', 'removeUl');
 
 //add class on li menu
-function add_classes_on_li($classes, $item, $args)
+function addClassesOnLi($classes, $item, $args)
 {
   $classes[] = 'nav-item';
   return $classes;
 }
-add_filter('nav_menu_css_class', 'add_classes_on_li', 1, 3);
+add_filter('nav_menu_css_class', 'addClassesOnLi', 1, 3);
 
 //add class on a menu
-function add_classes_on_a($ulclass)
+function addClassesOnA($ulclass)
 {
   return preg_replace('/<a/', '<a class="nav-link"', $ulclass, -1);
 }
-add_filter('wp_nav_menu', 'add_classes_on_a');
+add_filter('wp_nav_menu', 'addClassesOnA');
 
 // //change class sub-menu
-// function new_submenu_class($menu) {    
+// function newSubmenuClass($menu) {    
 //   $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
 //   return $menu;      
 // }
-// add_filter('wp_nav_menu','new_submenu_class'); 
+// add_filter('wp_nav_menu','newSubmenuClass'); 
 
 // //change class li sub-menu
-// function new_submenu_li_class($menu) {    
+// function newSubmenuLiClass($menu) {    
 //   $menu = preg_replace('/ class="menu-item-has-children"/','/ class="dropdown" /',$menu);        
 //   return $menu;      
 // }
-// add_filter('wp_nav_menu','new_submenu_li_class'); 
+// add_filter('wp_nav_menu','newSubmenuLiClass'); 
 
 //add class active menu
-function remove_active_class($class)
+function removeActiveClass($class)
 {
   return ($class == 'active') ? FALSE : TRUE;
 }
 
-function special_nav_class($classes, $item)
+function specialNavClass($classes, $item)
 {
   if (in_array('current-menu-item', $classes)) {
     $classes[] = 'active ';
@@ -182,11 +182,11 @@ function special_nav_class($classes, $item)
   // }
   return $classes;
 }
-add_filter('nav_menu_css_class', 'special_nav_class', 10, 2);
+add_filter('nav_menu_css_class', 'specialNavClass', 10, 2);
 
 // Hide content editor
-add_action('admin_init', 'hide_editor');
-function hide_editor()
+add_action('admin_init', 'hideEditor');
+function hideEditor()
 {
   // Get the Post ID.
   $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
@@ -214,9 +214,9 @@ function hide_editor()
 }
 
 // remove wp version in css and js
-add_filter('style_loader_src', 'sdt_remove_ver_css_js', 9999);
-add_filter('script_loader_src', 'sdt_remove_ver_css_js', 9999);
-function sdt_remove_ver_css_js($src)
+add_filter('style_loader_src', 'sdtRemoveVerCssJs', 9999);
+add_filter('script_loader_src', 'sdtRemoveVerCssJs', 9999);
+function sdtRemoveVerCssJs($src)
 {
   if (strpos($src, 'ver='))
     $src = remove_query_arg('ver', $src);
@@ -229,7 +229,7 @@ remove_action('wp_head', 'wp_generator');
  * Disable the emoji's
  */
 
-function disable_emojis_tinymce($plugins)
+function disableEmojisTinymce($plugins)
 {
   if (is_array($plugins)) {
     return array_diff($plugins, array('wpemoji'));
@@ -238,7 +238,7 @@ function disable_emojis_tinymce($plugins)
   }
 }
 
-function disable_emojis()
+function disableEmojis()
 {
   remove_action('wp_head', 'print_emoji_detection_script', 7);
   remove_action('admin_print_scripts', 'print_emoji_detection_script');
@@ -247,19 +247,19 @@ function disable_emojis()
   remove_filter('the_content_feed', 'wp_staticize_emoji');
   remove_filter('comment_text_rss', 'wp_staticize_emoji');
   remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-  add_filter('tiny_mce_plugins', 'disable_emojis_tinymce');
+  add_filter('tiny_mce_plugins', 'disableEmojisTinymce');
 }
-add_action('init', 'disable_emojis');
+add_action('init', 'disableEmojis');
 
 // Remove comment-reply.min.js from footer
-function comments_clean_header_hook()
+function commentsCleanHeaderHook()
 {
   wp_deregister_script('comment-reply');
 }
-add_action('init', 'comments_clean_header_hook');
+add_action('init', 'commentsCleanHeaderHook');
 
 // Remove some admin menu
-function custom_menu_page_removing()
+function customMenuPageRemoving()
 {
   // remove_menu_page( 'index.php' );                  //Dashboard
   // remove_menu_page( 'edit.php' );                   //Posts
@@ -272,7 +272,7 @@ function custom_menu_page_removing()
   remove_menu_page('tools.php');                  //Tools
   // remove_menu_page( 'options-general.php' );        //Settings
 }
-add_action('admin_menu', 'custom_menu_page_removing');
+add_action('admin_menu', 'customMenuPageRemoving');
 
 
 function get_breadcrumb()
@@ -339,7 +339,7 @@ function get_breadcrumb()
 // }
 
 // Post Type Settings
-function init_post_type()
+function initPostType()
 {
   register_post_type('product', array(
     'label' => 'Product',
@@ -384,7 +384,7 @@ function init_post_type()
   register_taxonomy('products', 'product', $category_labels);
   // products yg dipakai buat dapetin category
 }
-add_action('init', 'init_post_type');
+add_action('init', 'initPostType');
 
 /**
  * Force Taxonomy Subcategories to new template
@@ -393,7 +393,7 @@ add_action('init', 'init_post_type');
  *
  * @return String $template
  */
-function taxonomy_subcategory_template($template)
+function taxonomySubcategoryTemplate($template)
 {
 
   // We're not on a taxonomy page
@@ -418,13 +418,13 @@ function taxonomy_subcategory_template($template)
 
   return $template;
 }
-add_filter('template_include', 'taxonomy_subcategory_template');
+add_filter('template_include', 'taxonomySubcategoryTemplate');
 
 // remove width and height in images
-add_filter('post_thumbnail_html', 'remove_wps_width_attribute', 10);
-add_filter('image_send_to_editor', 'remove_wps_width_attribute', 10);
+add_filter('post_thumbnail_html', 'removeWpsWidthAttribute', 10);
+add_filter('image_send_to_editor', 'removeWpsWidthAttribute', 10);
 
-function remove_wps_width_attribute($html)
+function removeWpsWidthAttribute($html)
 {
   $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
   return $html;

@@ -79,7 +79,7 @@ get_header(); ?>
 
         <!-- Sidebar -->
         <div class="col-md-3 col-sm-4">
-          <aside class="side-bar">
+          <aside class="side-bar" aria-label='aside'>
 
             <!-- Catogires widget -->
             <div class="widget">

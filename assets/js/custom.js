@@ -24,7 +24,7 @@ $('.scroll').on('click touchstart', function (event) {
     //this will prevent if the user click several times the same link to freeze the scroll.
     event.preventDefault()
     //calculate destination place
-    var dest = 0
+    let dest = 0
     if ($(this.hash).offset().top > $(document).height() - $(window).height()) {
       dest = $(document).height() - $(window).height()
     } else {
