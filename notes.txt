@@ -155,3 +155,10 @@ foreach ( $terms as $term ) {
 // screenshot size 
 1200 x 900
 format jpg
+
+// check if empty
+ <?php if (!empty(get_field('top_header_ads', 'options'))) { ?>
+  <div class="col-md-12 header-ads text-center">
+    <?php the_field('top_header_ads', 'options'); ?>
+  </div>
+<?php } ?>

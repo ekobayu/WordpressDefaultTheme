@@ -26,10 +26,8 @@
   <meta name="distribution" content="Global" />
   <meta name="msapplication-TileColor" content="#da532c" />
   <link rel="sitemap" type="application/xml" title="sitemap" href="/sitemap.xml" />
-  <link rel="icon" href="<?php echo THEME_URI; ?>/assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=PT+Serif&display=swap" rel="stylesheet" />
 
   <?php wp_head(); ?>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
