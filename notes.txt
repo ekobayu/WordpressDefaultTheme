@@ -4,7 +4,7 @@
 <?php the_field('email_address'); ?>
 
 //image link
-<?php echo THEME_URI; ?>
+<?php echo THEME_URI; ?>/assets/
 
 //image with array alt text
 <?php $imagePromo = get_field('promo_image_desktop');?>
@@ -162,3 +162,41 @@ format jpg
     <?php the_field('top_header_ads', 'options'); ?>
   </div>
 <?php } ?>
+
+// post object
+<div class="col">
+  <?php
+  $featured_post1 = get_field('news_2');
+  if ($featured_post1) : ?>
+    <?php $post = $featured_post1; ?>
+    <?php setup_postdata($post); ?>
+    <div class="card h-100">
+      <?php the_post_thumbnail(); ?>
+      <div class="card-body">
+        <p class="card-text">
+          <small class="text-muted"><?php echo get_the_time('j F Y', $id); ?></small>
+          <small class="text-muted float-end"><?php the_category(', ') ?></small>
+        </p>
+        <a href="">
+          <h5 class="card-title"><?php the_title(); ?></h5>
+        </a>
+        <p class="card-text">
+          <?php echo substr($post->the_content, 0, 80); ?>
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="<?php the_permalink() ?>" class="card-link">Read More</a>
+      </div>
+    </div>
+    <?php wp_reset_postdata(); ?>
+  <?php endif; ?>
+</div>
+
+// true false on class
+<?php $monthActive = get_sub_field('active'); ?>
+<span class="<?php if ($monthActive) : ?>
+  <?php echo 'active'; ?>
+<?php else : ?>
+  <?php echo '' ?> 
+<?php endif; ?>">
+  <?php the_sub_field('month'); ?></span>
