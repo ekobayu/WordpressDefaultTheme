@@ -121,7 +121,7 @@ do_action('wpml_add_language_selector');
 define('WPCF7_AUTOP', false );
 
 // do shortcode
-<?php echo do_shortcode('[contact-form-7 id="139" title="Contact form 1"]'); ?>
+<?php echo do_shortcode('[contact-form-7 id="9d041cf" title="Contact form"]'); ?>
 
 // Get categories list
 <?php
@@ -200,3 +200,30 @@ format jpg
   <?php echo '' ?> 
 <?php endif; ?>">
   <?php the_sub_field('month'); ?></span>
+
+// submenu dropdown js
+$('.menu-item-67 > a').attr('aria-expanded', 'false')
+$('.menu-item-67 > a').addClass('dropdown-toggle')
+$('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
+
+// cf 7
+<div class="row g-3 form-contact">
+  <div class="col-md-6">
+    [text* nama class:form-control id:nama placeholder "Fullname"]
+  </div>
+  <div class="col-md-6">
+    [text website class:form-control id:website placeholder "Website"]
+  </div>
+  <div class="col-md-6">
+    [email* email class:form-control id:email placeholder "Email"]
+  </div>
+  <div class="col-md-6">
+    [select your-subject class:form-control class:form-select class:col-sm-11 "Web Applications" "Mobile Apps" "Networking Solution" "System Consulting" "Other"]
+  </div>
+  <div class="col-md-12">
+    [textarea description x5 class:form-control id:description placeholder "Description"]
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-light">Tell us about your needs</button>
+  </div>
+</div>
