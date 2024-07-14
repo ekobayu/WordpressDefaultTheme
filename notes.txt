@@ -227,3 +227,6 @@ $('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
     <button type="submit" class="btn btn-light">Tell us about your needs</button>
   </div>
 </div>
+
+// get certain category title
+<?php echo get_cat_name( $category_id = 1 );?>
