@@ -135,7 +135,7 @@ add_filter('wp_nav_menu', 'addClassesOnA');
 
 // //change class sub-menu
 // function newSubmenuClass($menu) {    
-//   $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu p-0" /',$menu);        
+//   $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu" /',$menu);        
 //   return $menu;      
 // }
 // add_filter('wp_nav_menu','newSubmenuClass'); 
@@ -267,7 +267,7 @@ add_action('admin_menu', 'customMenuPageRemoving');
 function get_breadcrumb()
 {
   echo '<li class="breadcrumb-item"><a href="' . home_url() . '" rel="nofollow">Home</a></li>';
-  if (is_category() || is_single()) {
+  if (is_category() || is_single() || is_tax()) {
     $category_detail = get_the_category($post->ID);
     $terms = get_the_terms($post->ID, 'products');
 
