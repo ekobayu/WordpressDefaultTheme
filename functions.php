@@ -372,8 +372,24 @@ function initPostType()
 
   register_taxonomy('products', 'product', $category_labels);
   // products yg dipakai buat dapetin category
+  // ganti 'product' line 373 dan 333 bersamaan
 }
 add_action('init', 'initPostType');
+
+// buat custom slug /category/ di single product
+// tambah /%products% di line 343
+function wpa_products_post_link($post_link, $id = 0)
+{
+  $post = get_post($id);
+  if (is_object($post)) {
+    $terms = wp_get_object_terms($post->ID, 'products');
+    if ($terms) {
+      return str_replace('%products%', $terms[0]->slug, $post_link);
+    }
+  }
+  return $post_link;
+}
+add_filter('post_type_link', 'wpa_products_post_link', 1, 3);
 
 /**
  * Force Taxonomy Subcategories to new template
