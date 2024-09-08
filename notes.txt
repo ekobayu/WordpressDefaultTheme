@@ -235,3 +235,66 @@ $J('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
 <li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>">Home</a></li>
 <li class="breadcrumb-item"><?php the_category(', ') ?></li>
 <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
+
+// search
+<form action="<?php echo home_url('/'); ?>" class="form-search form-inline">
+  <div class="input-group">
+    <input
+      class="form-control"
+      type="search"
+      name="s"
+      placeholder="Type anything here.."
+      aria-label="Search" />
+    <input type="submit" value="SEARCH" class="btn btn-primary" />
+  </div>
+</form>
+
+<?php global $wp_query;
+$total_results = $wp_query->found_posts; ?>
+<?php if (have_posts()) : ?>
+  <h1 class='mb-5'><?php printf(__('Search Results for: %s', 'deberita'), '<span>' . get_search_query() . '</span> (' . $total_results . ')'); ?></h1>
+<?php else : ?>
+  <h1 class='mb-5'><?php _e('Nothing Found', 'deberita'); ?></h1>
+<?php endif; ?>
+
+
+// pagination
+<nav aria-label="page navigation" class="navigation">
+<ul class="pagination">
+  <li class="page-item">
+    <a class="prev page-link" href="#">
+      <span aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="24" transform="rotate(-180 24 24)" fill="#E63946" />
+          <path
+            d="M30.3845 34.8674L30.0309 34.5139L30.3845 34.8674C30.8483 34.4034 30.8478 33.6512 30.3835 33.1878L23.6637 26.4818C23.3482 26.167 23.5712 25.6279 24.0169 25.6279L69.295 25.6279C69.9605 25.6279 70.5 25.0884 70.5 24.4229C70.5 23.7574 69.9605 23.2179 69.295 23.2179L24.0455 23.2179C23.6 23.2179 23.3769 22.6793 23.6919 22.3644L30.3915 15.6648C30.8594 15.1969 30.8568 14.4375 30.3857 13.9728C29.9191 13.5126 29.1686 13.5151 28.7052 13.9785L19.3215 23.3623C18.7357 23.948 18.7357 24.8978 19.3215 25.4836L28.7054 34.8676C29.1691 35.3312 29.9209 35.3312 30.3845 34.8674Z"
+            fill="#F1FAEE"
+            stroke="#F1FAEE" />
+        </svg>
+      </span>
+    </a>
+  </li>
+  <li class="page-item">
+    <span aria-current="page" class="page-numbers current">1</span>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#">...</a>
+  </li>
+  <li class="page-item">
+    <a class="next page-link" href="#">
+      <span aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="47" cy="24" r="24" fill="#E63946" />
+          <path
+            d="M40.6155 13.1326L40.9691 13.4861L40.6155 13.1326C40.1517 13.5966 40.1522 14.3488 40.6165 14.8122L47.3363 21.5182C47.6518 21.833 47.4288 22.3721 46.9831 22.3721H1.705C1.0395 22.3721 0.5 22.9116 0.5 23.5771C0.5 24.2426 1.03949 24.7821 1.705 24.7821H46.9545C47.4 24.7821 47.6231 25.3207 47.3081 25.6356L40.6085 32.3352C40.1407 32.8031 40.1432 33.5625 40.6143 34.0272C41.0809 34.4874 41.8314 34.4849 42.2948 34.0215L51.6785 24.6377C52.2643 24.052 52.2643 23.1022 51.6785 22.5164L42.2946 13.1324C41.8309 12.6688 41.0791 12.6688 40.6155 13.1326Z"
+            fill="#F1FAEE"
+            stroke="#F1FAEE" />
+        </svg>
+      </span>
+    </a>
+  </li>
+</ul>
+</nav>

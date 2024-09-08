@@ -328,6 +328,7 @@ function get_breadcrumb()
 // }
 
 // Post Type Settings
+// dashicons https://developer.wordpress.org/resource/dashicons/#menu-alt3
 function initPostType()
 {
   register_post_type('product', array(
