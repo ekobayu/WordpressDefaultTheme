@@ -202,9 +202,9 @@ format jpg
   <?php the_sub_field('month'); ?></span>
 
 // submenu dropdown js
-$('.menu-item-67 > a').attr('aria-expanded', 'false')
-$('.menu-item-67 > a').addClass('dropdown-toggle')
-$('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
+$J('.menu-item-67 > a').attr('aria-expanded', 'false')
+$J('.menu-item-67 > a').addClass('dropdown-toggle')
+$J('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
 
 // cf 7
 <div class="row g-3 form-contact">
@@ -230,3 +230,8 @@ $('.menu-item-67 > a').attr('data-bs-toggle', 'dropdown')
 
 // get certain category title
 <?php echo get_cat_name( $category_id = 1 );?>
+
+// breadcrumb
+<li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>">Home</a></li>
+<li class="breadcrumb-item"><?php the_category(', ') ?></li>
+<li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
