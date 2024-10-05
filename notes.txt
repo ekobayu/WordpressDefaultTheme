@@ -10,6 +10,11 @@
 <?php $imagePromo = get_field('promo_image_desktop');?>
 <img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
+//image with array alt text option
+<?php $imagePromo = get_field('promo_image_desktop', 'option);?>
+<img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
+
+
 //repeater acf options
 <?php
   if( have_rows('description_jam_operasional', 'options') ):
@@ -298,3 +303,7 @@ $total_results = $wp_query->found_posts; ?>
   </li>
 </ul>
 </nav>
+
+// rename wp-content in wp config
+define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/hokage' );
+define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/hokage' );

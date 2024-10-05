@@ -157,11 +157,11 @@ function specialNavClass($classes, $item)
 {
   if (in_array('current-menu-item', $classes)) {
     $classes[] = 'active ';
-  } else if (in_array('current-page-ancestor', $classes)) {
+  } elseif (in_array('current-page-ancestor', $classes)) {
     $classes[] = 'active ';
-  } else if (is_single() && $item->title == 'News') {
+  } elseif (is_single() && $item->title == 'News') {
     $classes[] = 'current-menu-item active';
-  } else if (is_single() && $item->title == 'Berita') {
+  } elseif (is_single() && $item->title == 'Berita') {
     $classes[] = 'current-menu-item active';
   }
   // else if(is_singular( 'product' )){

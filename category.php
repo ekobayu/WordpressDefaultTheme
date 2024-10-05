@@ -13,148 +13,53 @@
 
 get_header(); ?>
 
-<!-- Main Content -->
-<main class="wrapper">
-  <div class="theme-padding">
-    <div class="container">
-
-      <!-- Main Content Row -->
+<main class="contact-page">
+  <section class="section-1">
+    <div class="container-fluid">
       <div class="row">
-
-        <div class="col-md-9 col-sm-8">
-
-          <!-- latest list posts -->
-          <div class="post-widget m-0">
-            <!-- Post List -->
-            <div class="p-30 light-shadow white-bg">
-              <ul class="list-posts" id="catPage_listing">
-
-                <?php while (have_posts()) : the_post(); ?>
-
-                  <li>
-                    <div class="row">
-                      <!-- thumbnail -->
-                      <div class="col-sm-4 col-xs-5">
-                        <div class="post-thumb">
-                          <?php the_post_thumbnail('full', array('class' => '')); ?>
-                          <div class="thumb-hover">
-                            <div class="position-center-center">
-                              <a href="<?php the_permalink() ?>" class="fa fa-link"></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- thumbnail -->
-
-                      <!-- post detail -->
-                      <div class="col-sm-8 col-xs-7">
-
-                        <div class="post-content">
-                          <h4><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h4>
-                          <ul class="post-meta">
-                            <li><i class="fa fa-clock-o"></i><?php echo get_the_time('j F Y'); ?></li>
-                          </ul>
-                          <p><?php the_excerpt() ?>
-                            <a href="<?php the_permalink() ?>" class="read-more">read more...</a>
-                          </p>
-                        </div>
-
-                      </div>
-                      <!-- post detail -->
-                    </div>
-                  </li>
-
-                <?php endwhile; ?>
-
-              </ul>
-            </div>
-            <!-- Post List -->
-
-            <?php echo custom_pagination(); ?>
-
-          </div>
-          <!-- latest list posts -->
-
+        <div class="col-md-12 p-0">
+          <img class="img-fluid" src="<?php echo THEME_URI; ?>/assets/img/contact-banner.webp" alt="banner default" />
         </div>
-
-        <!-- Sidebar -->
-        <div class="col-md-3 col-sm-4">
-          <aside class="side-bar" aria-label='aside'>
-
-            <!-- Catogires widget -->
-            <div class="widget">
-              <h3 class="secondry-heading">Categories</h3>
-              <ul class="categories-widget">
-                <?php
-                $categories = get_categories(array(
-                  'orderby' => 'name',
-                  'order'   => 'ASC',
-                  'exclude'    => array(1),
-                ));
-
-                foreach ($categories as $category) {
-                  $category_link = sprintf(
-                    '<a href="%1$s" alt="%2$s"><em>%3$s</em>',
-                    esc_url(get_category_link($category->term_id)),
-                    esc_attr(sprintf(__('%s', 'microfiber'), $category->name)),
-                    esc_html($category->name)
-                  );
-                  $category_number = sprintf(
-                    esc_attr(sprintf(__('%s', 'microfiber'), $category->category_count)),
-                    esc_html($category->category_count)
-                  );
-
-                  echo '<li>' . sprintf(esc_html__('%s', 'microfiber'), $category_link) . '';
-                  echo '<span class="bg-green">' . sprintf(esc_html__('%s', 'microfiber'), $category_number) . '</span></a></li>';
-                } ?>
-              </ul>
-            </div>
-            <!-- Catogires widget -->
-
-            <!-- Tags -->
-            <div class="widget">
-              <h3 class="secondry-heading">populer tags</h3>
-              <div class="populer-tags">
-                <?php wp_tag_cloud('format=list'); ?>
-              </div>
-            </div>
-            <!-- Tags -->
-
-            <!-- Sidebar -->
-            <aside class="side-bar grid">
-              <!-- facebook widget -->
-              <div class="grid-item r-full-width">
-                <div class="widget">
-                  <h3 class="secondry-heading"><a href="https://twitter.com/MicrocleanID">Twitter Feed</a></h3>
-                  <div class="feed">
-                    <?php echo do_shortcode("[custom-twitter-feeds]"); ?>
-                  </div>
-                </div>
-              </div>
-              <!-- facebook widget -->
-              <!-- twitter widget -->
-              <div class="grid-item r-full-width">
-                <div class="widget">
-                  <h3 class="secondry-heading"><a href="https://www.facebook.com/MicrocleanID/">Facebook Feed</a></h3>
-                  <div class="feed">
-                    <?php echo do_shortcode("[custom-facebook-feed]"); ?>
-                  </div>
-                </div>
-              </div>
-              <!-- twitter widget -->
-            </aside>
-            <!-- Sidebar -->
-
-          </aside>
-        </div>
-        <!-- Sidebar -->
-
       </div>
-      <!-- Main Content Row -->
-
     </div>
-  </div>
+  </section>
+
+  <section class="section-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1><?php single_cat_title() ?></h1>
+          <p><?php the_archive_description('', ''); ?></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <?php
+          if (have_posts()) : while (have_posts()) : the_post(); ?>
+              <div class="search-item">
+                <div>
+                  <?php the_post_thumbnail('full', array('class' => 'd-block img-fluid')); ?>
+                </div>
+                <div class="description">
+                  <h2><?php the_title() ?></h2>
+                  <p>
+                    <?php echo (get_the_excerpt()); ?>
+                  </p>
+                  <a class="search-link" href="<?php the_permalink() ?>">Read More</a>
+                </div>
+              </div>
+          <?php endwhile;
+          endif;
+          wp_reset_query(); ?>
+
+          <nav aria-label="page navigation" class="navigation">
+            <?php echo custom_pagination(); ?>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<!-- main content -->
 
 <?php get_footer();
