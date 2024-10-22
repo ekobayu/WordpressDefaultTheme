@@ -111,9 +111,9 @@ if(ICL_LANGUAGE_CODE=='en') {
 do_action('wpml_add_language_selector');
 
 //check if field empty
-<?php if(! empty(get_sub_field('timeline_image') )) { ?>
-<?php if(! empty(get_field('timeline_image') )) { ?>
-<?php if(! empty(get_field('facebook', 'options') )) { ?>
+<?php if(! empty(get_sub_field('timeline_image') )) { ?>   <?php } ?>
+<?php if(! empty(get_field('timeline_image') )) { ?>  <?php } ?>
+<?php if(! empty(get_field('facebook', 'options') )) { ?>  <?php } ?>
 
 //wp menu 
 <?php wp_nav_menu(array(
