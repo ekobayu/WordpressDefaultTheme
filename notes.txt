@@ -1,7 +1,7 @@
 // acf shortcode
-<?php the_field('top_header_instagram', 'options'); ?>
-<?php the_sub_field('sub_field_name'); ?>
-<?php the_field('email_address'); ?>
+<?php echo get_field('promo_image_desktop', 'option); ?>
+<?php echo get_sub_field('sub_field_name'); ?>
+<?php echo get_field('email_address'); ?>
 
 //image link
 <?php echo THEME_URI; ?>/assets/
@@ -9,6 +9,11 @@
 //image with array alt text
 <?php $imagePromo = get_field('promo_image_desktop');?>
 <img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
+
+//image sub field with array alt text
+<?php $imagePromo = get_sub_field('promo_image_desktop');?>
+<img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
+
 
 //image with array alt text option
 <?php $imagePromo = get_field('promo_image_desktop', 'option);?>
@@ -121,6 +126,13 @@ do_action('wpml_add_language_selector');
     'container' => false,
     'items_wrap'=>'<ul class="navbar-nav mr-auto">%3$s</ul>',
 )); ?>
+
+ <ul class="navbar-nav me-auto justify-content-end flex-grow-1">
+  <?php wp_nav_menu(array(
+    'theme_location' => 'main_menu',
+    'container' => false,
+  )); ?>
+</ul>
 
 //delete br p cf 7
 define('WPCF7_AUTOP', false );
@@ -307,3 +319,11 @@ $total_results = $wp_query->found_posts; ?>
 // rename wp-content in wp config
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/hokage' );
 define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/hokage' );
+
+solution acf
+https://support.advancedcustomfields.com/forums/topic/need-urgent-solution-on-the-new-notification-after-the-last-update/
+echo get_field(...);
+echo get_sub_field(...);
+
+// remove size auto in image
+add_filter('wp_lazy_loading_enabled', '__return_false');

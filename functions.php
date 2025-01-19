@@ -32,7 +32,7 @@ function defaultScripts()
   wp_enqueue_style('default-screen2', THEME_URI . '/style.css', array());
 
   wp_enqueue_script('default-script', THEME_URI . '/assets/js/base.min.js', array('jquery'), false, true);
-  wp_enqueue_script('default-script1', THEME_URI . '/assets/js/custom.js', array('jquery'), false, true);
+  wp_enqueue_script('default-script1', THEME_URI . '/assets/js/custom.js', array('jquery'), rand(111, 9999), true);
 }
 
 add_action('wp_enqueue_scripts', 'defaultScripts');
