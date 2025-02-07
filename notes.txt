@@ -327,3 +327,17 @@ echo get_sub_field(...);
 
 // remove size auto in image
 add_filter('wp_lazy_loading_enabled', '__return_false');
+
+increase php upload
+https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/
+
+<IfModule php8_module>
+php_value upload_max_filesize 256M
+php_value post_max_size 256M
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
+</IfModule>
+
+migration wp
+https://www.hostinger.co.id/tutorial/cara-migrasi-wordpress
