@@ -1,5 +1,5 @@
 // acf shortcode
-<?php echo get_field('promo_image_desktop', 'option); ?>
+<?php echo get_field('promo_image_desktop', 'option'); ?>
 <?php echo get_sub_field('sub_field_name'); ?>
 <?php echo get_field('email_address'); ?>
 
@@ -16,7 +16,7 @@
 
 
 //image with array alt text option
-<?php $imagePromo = get_field('promo_image_desktop', 'option);?>
+<?php $imagePromo = get_field('promo_image_desktop', 'option');?>
 <img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
 
@@ -25,8 +25,8 @@
   if( have_rows('description_jam_operasional', 'options') ):
       while ( have_rows('description_jam_operasional', 'options') ) : the_row(); ?>
           <tr>
-            <td><?php the_sub_field('hari'); ?></td>
-            <td>&nbsp;<?php the_sub_field('jam'); ?></td>
+            <td><?php echo get_sub_field('sub_field_name'); ?></td>
+            <td>&nbsp;<?php echo get_sub_field('sub_field_name'); ?></td>
         </tr>
       <?php endwhile;
   endif;
@@ -37,19 +37,19 @@
   while ( have_rows('slideshow') ) : the_row(); ?>
     <?php $imageSlide = get_sub_field('image_slide');?>
     <div class="slide">
-      <a href="<?php the_sub_field('link_url'); ?>">
+      <a href="<?php echo get_sub_field('sub_field_name'); ?>">
         <img class='img-fluid' src="<?php echo esc_url($imageSlide['url']); ?>" alt="<?php echo esc_attr($imageSlide['alt']); ?>" />
       </a>
     </div>
   <?php endwhile;
 endif; ?>
 
-// repetaer acf with count
+// repeater acf with count
 <?php if( have_rows('list_faq') ):
   $count = 0;
   while ( have_rows('list_faq') ) : the_row(); ?>
-    <div class="accordion" id="<?php the_sub_field('topic'); ?>">
-      <h3><?php the_sub_field('topic'); ?></h3>
+    <div class="accordion" id="<?php echo get_sub_field('sub_field_name'); ?>">
+      <h3><?php echo get_sub_field('sub_field_name'); ?></h3>
       
       <?php if( have_rows('list_question') ):
         $countQuestion = 1;
@@ -57,12 +57,12 @@ endif; ?>
             <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-<?php echo $count; ?><?php echo $countQuestion; ?>" aria-expanded="false" aria-controls="#faq-<?php echo $count; ?><?php echo $countQuestion; ?>">
-              <?php the_sub_field('question_title'); ?>
+             <?php echo get_sub_field('sub_field_name'); ?>
               </button>
             </h2>
             <div id="faq-<?php echo $count; ?><?php echo $countQuestion; ?>" class="accordion-collapse collapse" aria-labelledby="<?php the_sub_field('question_title'); ?>" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-              <?php the_sub_field('question_answer'); ?>
+              <?php echo get_sub_field('sub_field_name'); ?>
               </div>
             </div>
           </div>
