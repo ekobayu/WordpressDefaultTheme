@@ -44,7 +44,30 @@
   <?php endwhile;
 endif; ?>
 
-// repeater acf with count
+// repeater acf with 1 count
+<?php if (have_rows('experiences_item')):
+  $count = 0;
+  while (have_rows('experiences_item')) : the_row(); ?>
+    <li class="nav-item" role="presentation">
+      <a href="#pills-tab-<?php echo $count; ?>">
+        <button
+          class="nav-link <?php if ($count == 0): ?><?php echo 'active'; ?><?php endif; ?>"
+          id="tab-<?php echo $count; ?>"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-tab-<?php echo $count; ?>"
+          type="button"
+          role="tab"
+          aria-controls="pills-tab-<?php echo $count; ?>"
+          aria-selected="true">
+          <?php echo get_sub_field('category'); ?>
+        </button>
+      </a>
+    </li>
+    <?php $count++; ?>
+<?php endwhile;
+endif; ?>
+
+// repeater acf with double count
 <?php if( have_rows('list_faq') ):
   $count = 0;
   while ( have_rows('list_faq') ) : the_row(); ?>
@@ -112,7 +135,7 @@ if(ICL_LANGUAGE_CODE=='en') {
     echo '<li class="breadcrumb-item">Berita</li>'; } }
 
 #Languange switcher
-#pilih customize button di wpml dulu
+#enable language-> Custom language switchers button di wpml dulu
 do_action('wpml_add_language_selector');
 
 //check if field empty
