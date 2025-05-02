@@ -162,6 +162,7 @@ define('WPCF7_AUTOP', false );
 
 // do shortcode
 <?php echo do_shortcode('[contact-form-7 id="9d041cf" title="Contact form"]'); ?>
+<?php echo do_shortcode(get_field('short_code_contact_form', 'option')); ?>
 
 // Get categories list
 <?php

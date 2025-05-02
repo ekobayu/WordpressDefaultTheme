@@ -435,3 +435,6 @@ function removeWpsWidthAttribute($html)
   $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
   return $html;
 }
+
+// Remove <p> and <br/> from Contact Form 7
+add_filter('wpcf7_autop_or_not', '__return_false');
