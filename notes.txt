@@ -365,3 +365,6 @@ php_value max_input_time 300
 
 migration wp
 https://www.hostinger.co.id/tutorial/cara-migrasi-wordpress
+
+// Enable WP_DEBUG mode
+define( 'WP_DEBUG', true );
