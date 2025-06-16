@@ -134,6 +134,9 @@ if(ICL_LANGUAGE_CODE=='en') {
  } else { if(ICL_LANGUAGE_CODE=='id') { 
     echo '<li class="breadcrumb-item">Berita</li>'; } }
 
+klo translate pakai tombol di dalem detail post, terus pilih wordpress live editor tab
+klo pakai yg di luar bakal error translatenya
+
 #Languange switcher
 #enable language-> Custom language switchers button di wpml dulu
 do_action('wpml_add_language_selector');
@@ -142,6 +145,7 @@ do_action('wpml_add_language_selector');
 <?php if(! empty(get_sub_field('timeline_image') )) { ?>   <?php } ?>
 <?php if(! empty(get_field('timeline_image') )) { ?>  <?php } ?>
 <?php if(! empty(get_field('facebook', 'options') )) { ?>  <?php } ?>
+// (!empty($imageSlide) && is_array($imageSlide))
 
 //wp menu 
 <?php wp_nav_menu(array(
