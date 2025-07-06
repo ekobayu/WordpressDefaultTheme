@@ -29,7 +29,7 @@ function defaultScripts()
 {
   wp_enqueue_style('default-screen', 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500;700&display=swap', array());
   wp_enqueue_style('default-screen1', THEME_URI . '/assets/css/style.min.css', array(), rand(111, 9999), 'all');
-  wp_enqueue_style('default-screen2', THEME_URI . '/style.css', array());
+  wp_enqueue_style('default-screen2', THEME_URI . '/style.css', array(), rand(111, 9999));
 
   wp_enqueue_script('default-script', THEME_URI . '/assets/js/base.min.js', array('jquery'), false, true);
   wp_enqueue_script('default-script1', THEME_URI . '/assets/js/custom.js', array('jquery'), rand(111, 9999), true);
@@ -44,27 +44,27 @@ function custom_pagination()
   global $wp_query;
   $big = 999999999; // need an unlikely integer
 
-  // Define the SVG for the previous button
-  // The SVG content is kept as is; it will be passed directly as HTML.
-  $prev_svg = '<svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" transform="rotate(-180 24 24)" fill="#E63946" /><path d="M30.3845 34.8674L30.0309 34.5139L30.3845 34.8674C30.8483 34.4034 30.8478 33.6512 30.3835 33.1878L23.6637 26.4818C23.3482 26.167 23.5712 25.6279 24.0169 25.6279L69.295 25.6279C69.9605 25.6279 70.5 25.0884 70.5 24.4229C70.5 23.7574 69.9605 23.2179 69.295 23.2179L24.0455 23.2179C23.6 23.2179 23.3769 22.6793 23.6919 22.3644L30.3915 15.6648C30.8594 15.1969 30.8568 14.4375 30.3857 13.9728C29.9191 13.5126 29.1686 13.5151 28.7052 13.9785L19.3215 23.3623C18.7357 23.948 18.7357 24.8978 19.3215 25.4836L28.7054 34.8676C29.1691 35.3312 29.9209 35.3312 30.3845 34.8674Z" fill="#F1FAEE" stroke="#F1FAEE" /></svg>';
+  // Original SVG content
+  $prev_svg_raw = '<svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" transform="rotate(-180 24 24)" fill="#E63946" /><path d="M30.3845 34.8674L30.0309 34.5139L30.3845 34.8674C30.8483 34.4034 30.8478 33.6512 30.3835 33.1878L23.6637 26.4818C23.3482 26.167 23.5712 25.6279 24.0169 25.6279L69.295 25.6279C69.9605 25.6279 70.5 25.0884 70.5 24.4229C70.5 23.7574 69.9605 23.2179 69.295 23.2179L24.0455 23.2179C23.6 23.2179 23.3769 22.6793 23.6919 22.3644L30.3915 15.6648C30.8594 15.1969 30.8568 14.4375 30.3857 13.9728C29.9191 13.5126 29.1686 13.5151 28.7052 13.9785L19.3215 23.3623C18.7357 23.948 18.7357 24.8978 19.3215 25.4836L28.7054 34.8676C29.1691 35.3312 29.9209 35.3312 30.3845 34.8674Z" fill="#F1FAEE" stroke="#F1FAEE" /></svg>';
+  $next_svg_raw = '<svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="47" cy="24" r="24" fill="#E63946" /><path d="M40.6155 13.1326L40.9691 13.4861L40.6155 13.1326C40.1517 13.5966 40.1522 14.3488 40.6165 14.8122L47.3363 21.5182C47.6518 21.833 47.4288 22.3721 46.9831 22.3721H1.705C1.0395 22.3721 0.5 22.9116 0.5 23.5771C0.5 24.2426 1.03949 24.7821 1.705 24.7821H46.9545C47.4 24.7821 47.6231 25.3207 47.3081 25.6356L40.6085 32.3352C40.1407 32.8031 40.1432 33.5625 40.6143 34.0272C41.0809 34.4874 41.8314 34.4849 42.2948 34.0215L51.6785 24.6377C52.2643 24.052 52.2643 23.1022 51.6785 22.5164L42.2946 13.1324C41.8309 12.6688 41.0791 12.6688 40.6155 13.1326Z" fill="#F1FAEE" stroke="#F1FAEE" /></svg>';
 
-  // Define the SVG for the next button
-  // The SVG content is kept as is; it will be passed directly as HTML.
-  $next_svg = '<svg width="40" height="40" viewBox="0 0 71 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="47" cy="24" r="24" fill="#E63946" /><path d="M40.6155 13.1326L40.9691 13.4861L40.6155 13.1326C40.1517 13.5966 40.1522 14.3488 40.6165 14.8122L47.3363 21.5182C47.6518 21.833 47.4288 22.3721 46.9831 22.3721H1.705C1.0395 22.3721 0.5 22.9116 0.5 23.5771C0.5 24.2426 1.03949 24.7821 1.705 24.7821H46.9545C47.4 24.7821 47.6231 25.3207 47.3081 25.6356L40.6085 32.3352C40.1407 32.8031 40.1432 33.5625 40.6143 34.0272C41.0809 34.4874 41.8314 34.4849 42.2948 34.0215L51.6785 24.6377C52.2643 24.052 52.2643 23.1022 51.6785 22.5164L42.2946 13.1324C41.8309 12.6688 41.0791 12.6688 40.6155 13.1326Z" fill="#F1FAEE" stroke="#F1FAEE" /></svg>';
+  // 1. HTML-encode the SVG content for safe DOMDocument parsing
+  // This converts characters like <, >, & to &lt;, &gt;, &amp;
+  $prev_svg_encoded = htmlentities($prev_svg_raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  $next_svg_encoded = htmlentities($next_svg_raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-  // No need to escape SVGs with htmlentities here.
-  // paginate_links expects raw HTML for prev_text/next_text.
-
+  // Use the HTML-encoded SVGs for paginate_links
   $pages = paginate_links(array(
-    'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-    'format' => '?paged=%#%',
-    'current' => max(1, get_query_var('paged')),
-    'total' => $wp_query->max_num_pages,
-    'prev_next' => true, // Ensure prev_next is true to display the arrows
-    'type'  => 'array',
-    'prev_text'  => '<span aria-hidden="true">' . $prev_svg . '</span>', // Use raw SVG
-    'next_text'  => '<span aria-hidden="true">' . $next_svg . '</span>', // Use raw SVG
+    'base'       => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+    'format'     => '?paged=%#%',
+    'current'    => max(1, get_query_var('paged')),
+    'total'      => $wp_query->max_num_pages,
+    'prev_next'  => true, // Ensure prev_next is true to display the arrows
+    'type'       => 'array',
+    'prev_text'  => '<span aria-hidden="true">' . $prev_svg_encoded . '</span>',
+    'next_text'  => '<span aria-hidden="true">' . $next_svg_encoded . '</span>',
   ));
+
   $output = '';
 
   if (is_array($pages)) {
@@ -74,7 +74,7 @@ function custom_pagination()
       $paged = (get_query_var('paged') == 0) ? 1 : get_query_var('paged');
     }
 
-    $output .=  '<ul class="pagination">';
+    $output .= '<ul class="pagination">';
     foreach ($pages as $page) {
       $output .= "<li class='page-item'>$page</li>";
     }
@@ -82,8 +82,13 @@ function custom_pagination()
 
     // Load HTML into DOMDocument for modification
     $dom = new \DOMDocument();
+    // Set error reporting off temporarily to suppress warnings for invalid HTML5 tags (like SVG in this context)
+    // This is a workaround for DOMDocument's strict parsing, as it treats SVG as foreign content in HTML parsing.
+    libxml_use_internal_errors(true);
     // Use LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD to prevent adding html/body/doctype tags
     $dom->loadHTML(mb_convert_encoding($output, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    libxml_clear_errors(); // Clear any errors that occurred
+    libxml_use_internal_errors(false); // Restore error reporting
 
     // Create an instance of DOMXpath and select all elements with the class 'page-numbers'
     $xpath = new \DOMXpath($dom);
@@ -110,8 +115,26 @@ function custom_pagination()
         );
       }
 
-      // Removed the unescaping logic for SVGs here, as they should already be raw.
-      // DOMDocument's saveHTML will handle its own encoding, but the browser will interpret the SVG.
+      // 2. HTML-decode the SVG content *after* DOM manipulation
+      // Find the <span> element that contains the encoded SVG
+      $span_nodes = $xpath->query(".//span[@aria-hidden='true']", $page_numbers_item);
+      if ($span_nodes->length > 0) {
+        $span_node = $span_nodes->item(0);
+        $span_content = $span_node->nodeValue; // This will get the HTML-encoded SVG
+        // Decode the HTML entities back to raw SVG
+        $decoded_svg_content = html_entity_decode($span_content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Clear the existing content and append the raw SVG as a new element
+        // This is a more robust way to insert the SVG than replacing nodeValue which might re-escape.
+        while ($span_node->hasChildNodes()) {
+          $span_node->removeChild($span_node->firstChild);
+        }
+        // Create a document fragment from the raw SVG to insert it correctly
+        $fragment = $dom->createDocumentFragment();
+        // We must wrap the SVG in a temporary element to allow DOMDocument to parse it as XML within HTML
+        $fragment->appendXML($decoded_svg_content);
+        $span_node->appendChild($fragment);
+      }
     }
     $output = $dom->saveHTML();
   }
