@@ -1,5 +1,5 @@
 // acf shortcode
-<?php echo get_field('promo_image_desktop', 'option'); ?>
+<?php echo get_field('promo_image_desktop', 'options'); ?>
 <?php echo get_sub_field('sub_field_name'); ?>
 <?php echo get_field('email_address'); ?>
 
@@ -16,7 +16,7 @@
 
 
 //image with array alt text option
-<?php $imagePromo = get_field('promo_image_desktop', 'option');?>
+<?php $imagePromo = get_field('promo_image_desktop', 'options');?>
 <img class='img-fluid' src="<?php echo esc_url($imagePromo['url']); ?>" alt="<?php echo esc_attr($imagePromo['alt']); ?>">
 
 
@@ -67,6 +67,61 @@ endif; ?>
 <?php endwhile;
 endif; ?>
 
+ <?php if (have_rows('list_works')):
+  $count = 0;
+  while (have_rows('list_works')) : the_row(); ?>
+
+    <div class="tab-pane fade <?php if ($count == 0): ?><?php echo 'show active'; ?><?php endif; ?>" id="pills-tab-<?php echo $count; ?>-<?php echo get_sub_field('title'); ?>" role="tabpanel" aria-labelledby="tab-<?php echo $count; ?>-<?php echo get_sub_field('title'); ?>">
+      <div class="item">
+        <div class="left">
+          <?php $imageSlide1 = get_sub_field('icon'); ?>
+          <img class='img-fluid' src="<?php echo esc_url($imageSlide1['url']); ?>" alt="<?php echo esc_attr($imageSlide1['alt']); ?>">
+          <h4> <?php echo get_sub_field('title'); ?></h4>
+          <p> <?php echo get_sub_field('description'); ?></p>
+        </div>
+        <div class="right">
+          <?php $imageSlide2 = get_sub_field('animate_image'); ?>
+          <img class='img-fluid' src="<?php echo esc_url($imageSlide2['url']); ?>" alt="<?php echo esc_attr($imageSlide2['alt']); ?>">
+        </div>
+      </div>
+    </div>
+
+    <?php $count++; ?>
+<?php endwhile;
+endif; ?>
+
+<div class="accordion" id="accordionExample">
+  <?php $count = 0; ?>
+  <?php if (have_rows('list_faq')):
+    while (have_rows('list_faq')) : the_row(); ?>
+      <div class="accordion-item">
+        <span class="accordion-header" id="heading-<?php echo $count; ?>">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse-<?php echo $count; ?>"
+            aria-expanded="false"
+            aria-controls="collapse-<?php echo $count; ?>">
+            <?php echo get_sub_field('question'); ?>
+          </button>
+        </span>
+        <div
+          id="collapse-<?php echo $count; ?>"
+          class="accordion-collapse collapse"
+          aria-labelledby="heading-<?php echo $count; ?>"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <?php echo get_sub_field('answer'); ?>
+          </div>
+        </div>
+      </div>
+      <?php $count++; ?>
+  <?php endwhile;
+  endif; ?>
+
+</div>
+
 // repeater acf with double count
 <?php if( have_rows('list_faq') ):
   $count = 0;
@@ -98,12 +153,43 @@ endif; ?>
   <?php endwhile;
 endif; ?> 
 
+// Reepater with left right order
+<?php if (have_rows('list_categorise')):
+  $count = 0;
+  while (have_rows('list_categorise')) : the_row(); ?>
+    <div class="row experience-item">
+      <div class="col-sm-4 text-center my-auto offset-xl-1 <?php if ($count % 2 == 0): ?> 
+        <?php echo 'order-1 order-md-2'; ?> 
+        <?php else: ?> 
+        <?php echo ''; ?> 
+        <?php endif; ?>">
+
+        <?php $imageSlide = get_sub_field('animate_image'); ?>
+        <img class='img-fluid' src="<?php echo esc_url($imageSlide['url']); ?>" alt="<?php echo esc_attr($imageSlide['alt']); ?>" />
+      </div>
+      <div class="col-sm-6 col-xl-5 my-auto offset-xl-1 <?php if ($count % 2 == 0): ?> 
+        <?php echo 'order-2 order-md-1'; ?> 
+        <?php else: ?> 
+        <?php echo ''; ?> 
+        <?php endif; ?>">
+
+        <p class="gradient"><?php echo get_sub_field('sub_title'); ?></p>
+        <h4><?php echo get_sub_field('title'); ?></h4>
+        <p>
+          <?php echo get_sub_field('description'); ?>
+        </p>
+      </div>
+    </div>
+    <?php $count++; ?>
+<?php endwhile;
+endif; ?>
+
 // count genap atau ganjil
  <?php if($count %2 !=0): ?> 
  <?php echo 'text-center'; ?> 
  <?php else: ?> 
  <?php echo 'order-md-2'; ?> 
- <?php endif; ?>"
+ <?php endif; ?>
 
 // nampilin post
 <?php while (have_posts()) : the_post(); ?>
