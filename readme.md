@@ -3,5 +3,5 @@
 === Wordpress Default ===
 
 - Contributors: Eko Bayu
-- Tested up to: WordPress 6.0
-- Version: 1.5
+- Tested up to: WordPress 7.1
+- Version: 1.8

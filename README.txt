@@ -1,9 +1,9 @@
 === Wordpress Default ===
 Contributors: Eko Bayu
 Requires at least: 5.0
-Tested up to: WordPress 6.0
-Requires PHP: 5.6
-Version: 1.5
+Tested up to: WordPress 7.1
+Requires PHP: 7.0
+Version: 1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: one-column, right-sidebar, flexible-header, accessibility-ready, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
